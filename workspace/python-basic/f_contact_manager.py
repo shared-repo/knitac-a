@@ -109,7 +109,26 @@ class ContactManager:
                             break
                     else:
                         print("삭제 대상을 찾을 수 없습니다.")
-                    
+            elif selection == '2': # 수정 선택
+                searched_result = self.search_contact()
+
+                if len(searched_result) == 0:
+                    print("검색 결과가 없습니다.")
+                else:
+                    print("[ 검색 결과 ]")
+                    for contact in searched_result:
+                        print(contact.info())
+
+                    no_to_edit = input("수정할 연락처 번호 : ")
+                    for contact in searched_result:
+                        if str(contact.no) == no_to_edit:
+                            contact.name = input("이름 : ")
+                            contact.email = input("이메일 : ")
+                            contact.phone = input("전화번호 : ")
+                            print("수정 했습니다.")
+                            break
+                    else:
+                        print("수정 대상을 찾을 수 없습니다.")        
             else:
                 print("지원하지 않는 작업입니다.")
 
