@@ -3,6 +3,9 @@
 # 2. 연락처 내용 : 고유번호(자동증가), 이름, 이메일, 전화번호
 # 3. 연락처 형식 :  딕셔너리 or 클래스
 
+from re import search
+
+
 class Contact:
     "연락처 정보를 저장하는 클래스"
 
@@ -38,6 +41,16 @@ class ContactManager:
         selection = input("작업 번호를 입력하세요 : ")
         return selection
 
+    def search_contact(self):
+        name = input('검색할 연락처 이름 : ')
+        searched_result = [] # 검색 결과를 저장할 리스트
+        for contact in self.contacts:
+            # if name == contact.name:  # 완전 일치 검색
+            if name in contact.name:    # 부분 일치 검색
+                searched_result.append(contact)
+
+        return searched_result
+
     def do_manage(self):
         "연락처 관리 로직 구현 함수"
 
@@ -70,12 +83,7 @@ class ContactManager:
                 for contact in self.contacts:
                     print(contact.info())
             elif selection == '5':
-                name = input('검색할 연락처 이름 : ')
-                searched_result = [] # 검색 결과를 저장할 리스트
-                for contact in self.contacts:
-                    # if name == contact.name:  # 완전 일치 검색
-                    if name in contact.name:    # 부분 일치 검색
-                        searched_result.append(contact)
+                searched_result = self.search_contact()
 
                 if len(searched_result) == 0:
                     print("검색 결과가 없습니다.")
@@ -83,6 +91,25 @@ class ContactManager:
                     print("[ 검색 결과 ]")
                     for contact in searched_result:
                         print(contact.info())
+            elif selection == '3': # 삭제 선택
+                searched_result = self.search_contact()
+
+                if len(searched_result) == 0:
+                    print("검색 결과가 없습니다.")
+                else:
+                    print("[ 검색 결과 ]")
+                    for contact in searched_result:
+                        print(contact.info())
+
+                    no_to_delete = input("삭제할 연락처 번호 : ")
+                    for contact in searched_result:
+                        if str(contact.no) == no_to_delete:
+                            self.contacts.remove(contact)
+                            print("삭제 했습니다.")
+                            break
+                    else:
+                        print("삭제 대상을 찾을 수 없습니다.")
+                    
             else:
                 print("지원하지 않는 작업입니다.")
 
