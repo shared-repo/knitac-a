@@ -42,7 +42,10 @@ class ContactManager:
         "연락처 관리 로직 구현 함수"
 
         while True: # 무한 반복 -> 반드시 while 내부에서 break를 사용해야 합니다.
+            print()
             selection = self.show_menu()
+            print()
+
             if selection == "0":
                 print("프로그램을 종료합니다.....")
                 break
@@ -66,6 +69,20 @@ class ContactManager:
                 print("[ 연락처 목록 ]")
                 for contact in self.contacts:
                     print(contact.info())
+            elif selection == '5':
+                name = input('검색할 연락처 이름 : ')
+                searched_result = [] # 검색 결과를 저장할 리스트
+                for contact in self.contacts:
+                    # if name == contact.name:  # 완전 일치 검색
+                    if name in contact.name:    # 부분 일치 검색
+                        searched_result.append(contact)
+
+                if len(searched_result) == 0:
+                    print("검색 결과가 없습니다.")
+                else:
+                    print("[ 검색 결과 ]")
+                    for contact in searched_result:
+                        print(contact.info())
             else:
                 print("지원하지 않는 작업입니다.")
 
