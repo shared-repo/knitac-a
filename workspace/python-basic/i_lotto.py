@@ -41,5 +41,40 @@ class Lotto:
             valid = self.checkMean(numbers)
             if valid: # valid가 True이면
                 break
-            
+
         return numbers
+
+    def show_menu(self):
+        print("*" * 30)
+        print("* 1. 새 번호 뽑기.")
+        print("* 2. 뽑힌 번호 보기.")
+        print("* 3. 뽑힌 번호 저장.")
+        print("* 0. 프로그램 종료.")
+        print("*" * 30)
+        selection = input("원하는 작업 번호 : ")
+        return selection
+
+    def start_game(self):
+        while True:
+            selection = self.show_menu()
+            if selection == "1": # 새 번호 뽑기
+                numbers = self.select_winning_numbers() # 번호 뽑기
+                self.showNumbers(numbers) # 보여 주기
+                yn = input("뽑힌 번호를 게임 목록에 추가할까요(y/n)? ")
+                if yn == "y":
+                    self.games.append(numbers)
+
+            elif selection == "2": # 게임 목록 보기
+                if len(self.games) == 0:
+                    print("뽑힌 번호가 없습니다.")
+                    continue
+                for numbers in self.games:
+                    self.showNumbers(numbers)
+
+            elif selection == "3":
+                pass
+            elif selection == "0":
+                print("행운을 빕니다.")
+                break
+            else:
+                print("지원하지 않는 명령입니다.")
