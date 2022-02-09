@@ -1,3 +1,5 @@
+import datetime # 날짜 처리 모듈
+
 class Lotto:
 
     def __init__(self):
@@ -72,9 +74,21 @@ class Lotto:
                     self.showNumbers(numbers)
 
             elif selection == "3":
-                pass
+                d = datetime.datetime.now() # 현재 날짜 및 시간                
+                fname = "games-{0}{1:02d}{2:02d}-{3:02d}{4:02d}{5:02d}.txt".format(d.year, d.month, d.day, 
+                                                               d.hour, d.minute, d.second)
+                with open(fname, "wt", encoding="utf-8") as f:
+                    for numbers in self.games:
+                        # format(*[1, 2, 3, 4, 5, 6]) -> format(1, 2, 3, 4, 5, 6)
+                        f.write("[{0:2d}][{1:2d}][{2:2d}][{3:2d}][{4:2d}][{5:2d}]\n".format(*numbers))
+                print("뽑힌 번호를 파일에 저장했습니다.")
+
             elif selection == "0":
                 print("행운을 빕니다.")
                 break
             else:
                 print("지원하지 않는 명령입니다.")
+
+if __name__ == "__main__":
+    lotto = Lotto()
+    lotto.start_game()
