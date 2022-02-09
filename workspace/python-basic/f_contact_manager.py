@@ -61,7 +61,8 @@ class ContactManager:
 
             if selection == "0":
                 print("프로그램을 종료합니다.....")
-                break
+                break # while을 break
+
             elif selection == '1': # 등록 선택
                 # 연락처 정보 입력
                 name = input("이름 : ")
@@ -74,15 +75,16 @@ class ContactManager:
                 self.contacts.append(contact)
                 # 메시지 출력
                 print("새 연락처를 등록했습니다.")
+
             elif selection == '4':  # 목록보기 선택
                 if len(self.contacts) == 0: # 등록된 연락처가 없는 경우
                     print("등록된 연락처가 없습니다.")
-                    continue # 반복문의 처음으로 즉시 이동
+                    continue # 반복문의 처음으로 즉시 이동 ( 여기서는 while 시작 위치로 이동 )
 
                 print("[ 연락처 목록 ]")
                 for contact in self.contacts:
                     print(contact.info())
-            elif selection == '5':
+            elif selection == '5': # 검색 선택
                 searched_result = self.search_contact()
 
                 if len(searched_result) == 0:
@@ -91,13 +93,14 @@ class ContactManager:
                     print("[ 검색 결과 ]")
                     for contact in searched_result:
                         print(contact.info())
+
             elif selection == '3': # 삭제 선택
                 searched_result = self.search_contact()
 
                 if len(searched_result) == 0:
                     print("검색 결과가 없습니다.")
                 else:
-                    print("[ 검색 결과 ]")
+                    print("[ 삭제 대상 연락처 검색 결과 ]")
                     for contact in searched_result:
                         print(contact.info())
 
@@ -109,13 +112,14 @@ class ContactManager:
                             break
                     else:
                         print("삭제 대상을 찾을 수 없습니다.")
+
             elif selection == '2': # 수정 선택
                 searched_result = self.search_contact()
 
                 if len(searched_result) == 0:
                     print("검색 결과가 없습니다.")
                 else:
-                    print("[ 검색 결과 ]")
+                    print("[ 수정 대상 연락처 검색 결과 ]")
                     for contact in searched_result:
                         print(contact.info())
 
@@ -129,7 +133,7 @@ class ContactManager:
                             break
                     else:
                         print("수정 대상을 찾을 수 없습니다.")        
-            else:
+            else: # if selection == '?'에 대응하는 else
                 print("지원하지 않는 작업입니다.")
 
 
