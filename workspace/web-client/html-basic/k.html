@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+    <title>Form and Input Elements</title>
+</head>
+<body>
+
+    <form action="#" method="get">
+        <table border="1" width="500" align="center">
+            <tr>
+                <th colspan="2">회원 가입 정보</th>
+            </tr>
+            <tr>
+                <th style="width:150px">아이디</th>
+                <td>
+                    <!-- input 요소의 name 속성은 서버로 전송하는 데이터의 이름 -->
+                    <input type="text" name="id" style="width:300px">
+                </td>
+            </tr>
+            <tr>
+                <th>패스워드</th>
+                <td>
+                    <input type="password" name="passwd" style="width:300px">
+                </td>
+            </tr>
+            <tr>
+                <th>패스워드확인</th>
+                <td>
+                    <input type="password" name="confirm" style="width:300px">
+                </td>
+            </tr>
+            <tr>
+                <th>이메일</th>
+                <td>
+                    <!-- <input type="email" name="email" style="width:300px"> -->
+                    <input type="text" name="emailid" style="width:140px">
+                    @
+                    <select name="emaildomain">
+                        <option>naver.com</option>
+                        <option>gmail.com</option>
+                        <option>daum.net</option>
+                        <option>example.com</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>성별</th>
+                <td>
+                    <!-- name의 값이 같은 radio는 배타적 단일 선택 -->
+                    <input type="radio" name="gender" value="male">남
+                    <input type="radio" name="gender" value="female">여
+                </td>
+            </tr>
+            <tr>
+                <th>취미</th>
+                <td>
+                    <!-- name의 값이 같은 checkbox는 다중 선택 -->
+                    <input type="checkbox" name="hobby" value="1">독서
+                    <input type="checkbox" name="hobby" value="2">여행
+                    <input type="checkbox" name="hobby" value="3">영화
+                    <br>
+                    <input type="checkbox" name="hobby" value="4">댄스
+                    <input type="checkbox" name="hobby" value="5">요리
+                    <input type="checkbox" name="hobby" value="6">음악
+                </td>
+            </tr>
+            <tr>
+                <th>사진</th>
+                <td>
+                    <input type="file" name="picture">
+                </td>
+            </tr>
+            <tr>
+                <th>가입인사</th>
+                <td>
+                    <textarea name="greetings" rows="5" cols="47"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <th>숨겨진입력</th>
+                <td>
+                    <input type="hidden" name="hiddenValue" value="100">
+                </td>
+            </tr>
+            <tr>                
+                <th colspan="2">
+                    <input type="submit" value="가입"> <!-- 서버로 폼 전송 명령 버튼-->
+                    &nbsp;
+                    <input type="image" src="" alt="가입2"> <!-- submit과 동일, 이미지로 표시 -->
+                    &nbsp;
+                    <input type="reset" value="초기화"> <!-- 모든 입력요소를 처음 상태로 복원 -->
+                    &nbsp;
+                    <input type="button" value="자바스크립트 연결"> <!-- 자바스크립트 코드와 연결 -->
+                </th>
+            </tr>
+        </table>
+
+    </form>
+    
+</body>
+</html>
