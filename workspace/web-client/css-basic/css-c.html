@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>CSS</title>
+
+    <style type="text/css">
+        /* CSS 주석 */
+        /* 1. 전체 선택자 ( * ) : 모든 요소에 대해 적용 */
+        * { 
+            color: blue; 
+        }
+
+        /* 2. 태그 선택자 : 지정된 태그에 대해 적용 */
+        h2 {
+            text-align: center;
+            background-color: yellow;
+        }
+
+        /* 3. 아이디 선택자 : id 속성의 값으로 태그 선택 */
+        #b /* id="b" */ {
+            font-style: italic;
+            color: red;
+        }
+
+        /* 4. 클래스 선택자 : class 속성의 값으로 태그 선택 */        
+        .z /* class="z" */ {
+            background-color: orange;
+        }
+
+        h3, #b, .y {
+            text-decoration: underline;
+        }
+    </style>
+    
+    
+</head>
+<body>
+    <h1 id="a">스타일이 적용된 요소 1</h1>
+    <h2 id="b">스타일이 적용된 요소 2</h2>
+    <h2 id="c" class="z y">스타일이 적용된 요소 3</h2>
+    <h3 id="d" class="z">스타일이 적용된 요소 4</h3>
+    
+</body>
+</html>
