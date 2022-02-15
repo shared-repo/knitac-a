@@ -7,7 +7,48 @@
 <body>
     <h1>선택문 연습</h1>
     
-    <script type="text/javascript">        
+    <script type="text/javascript"> 
+    // 가위 바위 보 게임
+    // 1. 컴퓨터가 값 선택 ( 1 : 가위, 2 : 바위, 3 : 보) -> 저장
+    // 2. 사용자 입력 ( 1 : 가위, 2 : 바위, 3 : 보) -> 저장
+    // 3. 비교해서 결과 출력
+
+    // 1.
+    // document.write( Math.random() ); // Math.random() : 0 ~ 1 사이의 난수 발생
+    var c = parseInt( Math.random() * 3 ) + 1; // parseInt : 값 -> 정수
+    // document.write(c);
+
+    // 2. 
+    // prompt : 사용자로부터 값을 입력 받는 창
+    var u = prompt("가위(1), 바위(2), 보(3) 중 하나를 입력하세요"); 
+    u = parseInt(u); // prompt는 항상 문자열 반환 -> 정수로 변경
+    // document.write(u)
+
+    // 3. 
+    var result;
+    if (u === c) {
+        result = "비겼습니다.";
+    } else if ( (u == 1 && c == 3) || (u == 2 && c == 1) || (u == 3 && c == 2) ) {
+        result = "이겼습니다.";
+    } else {
+        result = "졌습니다.";
+    }
+
+    document.write("사용자 : ");
+    switch(u) {
+        case 1: document.write("가위"); break;
+        case 2: document.write("바위"); break;
+        default : document.write("보"); break; // default : 나머지 모든 경우
+    }
+    document.write("<br>");
+    document.write("컴퓨터 : ");
+    switch(c) {
+        case 1: document.write("가위"); break;
+        case 2: document.write("바위"); break;
+        default : document.write("보"); break; // default : 나머지 모든 경우
+    }
+    document.write("<br>");
+    document.write("<h2>" + result + "</h2>");
     </script>
    
 </body>
