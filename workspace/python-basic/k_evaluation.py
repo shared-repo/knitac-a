@@ -46,7 +46,6 @@ class ListQueue:
     def info(self):
         print("queue >> {0}".format(self.dataList))
 
-
 if __name__ == "__main__":
     # test 1
     # valueFrequency1('abcmartmbcaacc')
