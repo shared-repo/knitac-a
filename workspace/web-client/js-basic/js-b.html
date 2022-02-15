@@ -11,11 +11,45 @@
         var a;                      // 변수 선언
         a = 10;                     // 변수에 값 저장
         document.write(a);          // HTML 문서에 출력 내용 추가
-        document.write("<br>")
+        document.write("<br>");
 
         var b = 20;                 // 변수 선언 + 값 저장 (초기화)
-        document.write(b)
-        document.write("<br>")
+        document.write(b);
+        document.write("<br>");
+
+        var c = 10;
+        document.write(c + c);
+        document.write("<br>");
+        var d = "10";
+        document.write(d + d);
+        document.write("<br>");
+
+        var e = true; // True
+        document.write(e);
+        document.write("<br>");
+
+        var f = 10;
+        f++; // f = f + 1 ... f += 1
+        document.write(f); //11 출력
+        document.write("<br>");
+        ++f; // == f++
+        document.write(f); //12 출력
+        document.write("<br>");
+        --f; // == f = f - 1
+        document.write(f); //11 출력
+        document.write("<br>");
+
+        var g1 = 10
+        var g2 = "10"
+        document.write(g1 == g2); // true ( 자료형이 달라도 값이 같으면 true )
+        document.write("<br>");
+        document.write(g1 === g2); // false ( 자료형과 값이 모두 같아야 true )
+        document.write("<br>");
+
+        val = ("a" == "a") ? "같습니다." : "같지 않습니다."
+        document.write("a와 a가 같나요? " + val + "<br />");
+        val = ("a" == "b") ? "같습니다." : "같지 않습니다."
+        document.write("a와 b가 같나요? " + val + "<br />")
 
     </script>
    
