@@ -1,0 +1,1 @@
+alert('this code is from another file');
