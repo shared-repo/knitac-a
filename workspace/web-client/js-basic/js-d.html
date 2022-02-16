@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title></title>    
+</head>
+<body>
+    <h1>반복문 연습</h1>
+    
+    <script type="text/javascript"> 
+        // var again = true;        
+        // while (again) {
+        //     var number = parseInt(Math.random() * 900) + 100; // 100 ~ 999(포함)
+        //     alert("RANDOM NUMBER : " + number);
+
+        //     again = confirm("계속할까요?"); // confirm : ok / cancel 선택
+        // }
+     
+        do {
+            var number = parseInt(Math.random() * 900) + 100; // 100 ~ 999(포함)
+            alert("RANDOM NUMBER : " + number);
+
+            var again = confirm("계속할까요?"); // confirm : ok / cancel 선택
+        } while (again);
+
+    </script>
+   
+</body>
+</html>
