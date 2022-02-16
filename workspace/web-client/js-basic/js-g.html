@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>클라이언트 객체 - Document</title> 
+       
+</head>
+<body>
+    <h2>Document 객체 연습</h2>
+    <hr>
+    <div id="message"></div>
+    <div id="message2"></div>
+
+    <script type="text/javascript"> 
+
+        document.write( "<h3>" + document.URL + "</h3>" );
+        document.write( "<h3>" + document.title + "</h3>" );
+
+        // 1-1. getElementById("message"); id="message"인 요소 찾기 
+        var div = document.getElementById("message"); 
+        // 1-2. 찾은 객체 사용 (조작)
+        div.innerHTML = "1 현재 시간은 " + new Date(); // <div>innerHTML</div>
+
+        // 2-1. querySelector("선택자"); 선택자에 해당하는 요소 찾기
+        var div2 = document.querySelector('#message2');
+        // 2-2. 찾은 객체 사용
+        div2.innerHTML = "2 현재 시간은 " + new Date(); // <div>innerHTML</div>
+
+    </script>
+   
+</body>
+</html>
