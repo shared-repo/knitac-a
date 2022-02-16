@@ -23,6 +23,21 @@
        }
        var result = multiply(10, 20);
        alert(result);
+
+       // 자바스크립트의 함수는 변수에 저장할 수 있습니다. 
+       var f = multiply; // 함수를 저장한 변수는 함수가 됩니다.
+       result2 = f(20, 40); // --> multiply 호출
+       alert(result2);
+
+       // 익명 함수 : 이름이 없는 함수 : 함수를 만들어서 변수에 바로 저장
+       var f2 = function (x, y) {
+           return x + y;
+       }
+       alert( f2(10, 20) );
+
+    // alert('사용자에게 정보를 표시하고 확인을 요구하는 창 표시');
+    // confirm('사용자에게 정보를 표시하고 확인/취소 선택을 요구하는 창 표시');
+    // prompt('사용자에게 정보를 표시하고 키보드 입력을 요구하는 창 표시');
         
     </script>
    
