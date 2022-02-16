@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title></title> 
+       
+</head>
+<body>
+    <h2>Document 객체와 이벤트 처리 연습</h2>
+    <hr>
+    <input type="text" id="src">
+    <button id="copy-data-button">데이터 복사</button>
+    <hr>
+    <input type="text" id="dest" readonly>
+    <div id="dest2"></div>
+    
+    <script type="text/javascript">
+        //1. 이벤트 처리기 함수 만들기
+        function copyData() {
+            var src = document.querySelector("#src");
+            var dest = document.querySelector("#dest");
+            var dest2 = document.querySelector("#dest2");
+            dest.value = src.value; // input의 표시되는 데이터는 value 속성
+            dest2.innerHTML = src.value; // div의 표시되는 데이터는 innerHTML 속성
+        }
+
+        //2-1. 이벤트와 이벤트 처리기 연결 1
+        // var button = document.querySelector("#copy-data-button");
+        // button.addEventListener("click", copyData);
+
+        //2-2. 이벤트와 이벤트 처리기 연결 2
+        var src = document.querySelector("#src");
+        src.addEventListener("keyup", copyData);
+    
+    </script>
+   
+</body>
+</html>
