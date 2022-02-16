@@ -3,39 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <title></title> 
-       
+    <style type="text/css">
+        #rainbow td {
+            width: 70px;
+            height: 70px
+        }
+    </style>
 </head>
 <body>
     <h2>Document 객체와 이벤트 처리 연습</h2>
     <hr>
-    원 :    <input type="text" id="won">&nbsp;
-            <button id="exchange-button1">환율계산</button>&nbsp;
-    달러 :  <input type="text" id="dollar" readonly>
-    <hr>
-    달러 :  <input type="text" id="dollar2">&nbsp;
-            <button id="exchange-button2">환율계산</button>&nbsp;
-    원 :    <input type="text" id="won2" readonly>
+    <table border="1" align="center">
+        <tr id="rainbow">
+            <td id="td1" style="background-color:red">&nbsp;</td>
+            <td id="td2" style="background-color:orange">&nbsp;</td>
+            <td id="td3" style="background-color:yellow">&nbsp;</td>
+            <td id="td4" style="background-color:green">&nbsp;</td>
+            <td id="td5" style="background-color:blue">&nbsp;</td>
+            <td id="td6" style="background-color:navy">&nbsp;</td>
+            <td id="td7" style="background-color:purple">&nbsp;</td>
+        </tr>
+        <tr>
+            <td id="canvas" colspan="7" style="height:250px"></td>
+        </tr>
+    </table>
     
     <script type="text/javascript">
-        // 환율 1$ == 1197.40W
-        // 여기에 구현 코드를 작성하세요 
-        function wonToDollar() { // user, userName, email, emailAddress
-            var won = document.querySelector("#won");
-            var dollar = document.querySelector("#dollar");
-            value = parseFloat(won.value); // parseFloat : 문자열 -> 실수(부동소수점)
-            dollar.value = value / 1197.40;
+        //1. 이벤트 처리 함수 만들기
+        function changeColor1() {
+            var canvas = document.querySelector("#canvas");
+            // alert(canvas.style.height); // style="height:100px" 값 읽기
+            canvas.style.backgroundColor = 'red'; // style='background-color:red'로 설정
         }
-        function dollarToWon() {
-            var won = document.querySelector("#won2");
-            var dollar = document.querySelector("#dollar2");
-            value = parseFloat(dollar.value);
-            won.value = value * 1197.40;
-        }
-
-        var button1 = document.querySelector("#exchange-button1");
-        button1.addEventListener("click", wonToDollar);
-        var button2 = document.querySelector("#exchange-button2");
-        button2.addEventListener("click", dollarToWon);
+        //2. 이벤트에 이벤트 처리기 연결
+        var td1 = document.querySelector("#td1");
+        td1.addEventListener('click', changeColor1);
+        
+       // id="td1" 을 클릭하면 id="canvas"에 "빨강색이 선택되었습니다"를 표시
+       // id="td2" 을 클릭하면 id="canvas"에 "주황색이 선택되었습니다"를 표시
+       // id="td3" 을 클릭하면 id="canvas"에 "노랑색이 선택되었습니다"를 표시
+       // id="td4" 을 클릭하면 id="canvas"에 "초록색이 선택되었습니다"를 표시
+       // id="td5" 을 클릭하면 id="canvas"에 "파랑색이 선택되었습니다"를 표시
+       // id="td6" 을 클릭하면 id="canvas"에 "남색이 선택되었습니다"를 표시
+       // id="td7" 을 클릭하면 id="canvas"에 "보라색이 선택되었습니다"를 표시
     </script>
    
 </body>
