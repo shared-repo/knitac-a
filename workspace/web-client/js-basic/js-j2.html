@@ -39,18 +39,27 @@
         // 1. 이벤트 처리기 함수 만들기
         function selectWinningNumbers(event) {
             // 6개 숫자 뽑기 -> 각 숫자를 여섯 개의 td에 표시
-            var td = document.querySelector("#no1");
-            td.innerHTML = parseInt(Math.random() * 45) + 1; // 1 ~ 45(포함)
-            td = document.querySelector("#no2");
-            td.innerHTML = parseInt(Math.random() * 45) + 1; // 1 ~ 45(포함)
-            td = document.querySelector("#no3");
-            td.innerHTML = parseInt(Math.random() * 45) + 1; // 1 ~ 45(포함)
-            td = document.querySelector("#no4");
-            td.innerHTML = parseInt(Math.random() * 45) + 1; // 1 ~ 45(포함)
-            td = document.querySelector("#no5");
-            td.innerHTML = parseInt(Math.random() * 45) + 1; // 1 ~ 45(포함)
-            td = document.querySelector("#no6");
-            td.innerHTML = parseInt(Math.random() * 45) + 1; // 1 ~ 45(포함)
+            // var td = document.querySelector("#no1");
+            // td.innerHTML = parseInt(Math.random() * 45) + 1; // 1 ~ 45(포함)
+            // td = document.querySelector("#no2");
+            // td.innerHTML = parseInt(Math.random() * 45) + 1; // 1 ~ 45(포함)
+            // td = document.querySelector("#no3");
+            // td.innerHTML = parseInt(Math.random() * 45) + 1; // 1 ~ 45(포함)
+            // td = document.querySelector("#no4");
+            // td.innerHTML = parseInt(Math.random() * 45) + 1; // 1 ~ 45(포함)
+            // td = document.querySelector("#no5");
+            // td.innerHTML = parseInt(Math.random() * 45) + 1; // 1 ~ 45(포함)
+            // td = document.querySelector("#no6");
+            // td.innerHTML = parseInt(Math.random() * 45) + 1; // 1 ~ 45(포함)
+
+            var numbers = new Array(6); // 6개
+            for (var i = 0; i < numbers.length; i++) {
+                numbers[i] = parseInt(Math.random() * 45) + 1;
+            }
+            var tds = document.querySelectorAll("tr#numbers td"); // 6개
+            for (var i = 0; i < numbers.length; i++) {
+                tds[i].innerHTML = numbers[i];
+            }
         }
         // 2. 이벤트 처리기를 객체에 등록
         var button = document.querySelector("#button1")
