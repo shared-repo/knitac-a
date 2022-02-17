@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        tr#numbers td { /* id="numbers"인  tr 요소 하위의 모든 td   */
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Document 객체와 이벤트 처리 실습</h2>
+    <hr>
+    <table border="1" align="center">
+        <tr>
+            <td colspan="6">
+                <button id="button1" style="width:100%">당첨 예상 번호 뽑기</button>
+            </td>
+        </tr>
+        <tr id="numbers">
+            <td id="no1"></td>
+            <td id="no2"></td>
+            <td id="no3"></td>
+            <td id="no4"></td>
+            <td id="no5"></td>
+            <td id="no6"></td>
+        </tr>
+    </table>
+        
+    <script type="text/javascript">
+        // button1을 클릭하면 1 ~ 45 사이의 난수 6개 만들어서 no1 ~ no6에 표시
+        // 찾기 : document.querySelector, document.querySelectorAll
+        // 이벤트 연결 : addEventListener
+        // td에 값 표시 : innerHTML (innerText)
+        // 난수 발생 : Math.random()
+        
+        // 1. 이벤트 처리기 함수 만들기
+        function selectWinningNumbers(event) {
+            // 6개 숫자 뽑기 -> 각 숫자를 여섯 개의 td에 표시
+            var td = document.querySelector("#no1");
+            td.innerHTML = parseInt(Math.random() * 45) + 1; // 1 ~ 45(포함)
+            td = document.querySelector("#no2");
+            td.innerHTML = parseInt(Math.random() * 45) + 1; // 1 ~ 45(포함)
+            td = document.querySelector("#no3");
+            td.innerHTML = parseInt(Math.random() * 45) + 1; // 1 ~ 45(포함)
+            td = document.querySelector("#no4");
+            td.innerHTML = parseInt(Math.random() * 45) + 1; // 1 ~ 45(포함)
+            td = document.querySelector("#no5");
+            td.innerHTML = parseInt(Math.random() * 45) + 1; // 1 ~ 45(포함)
+            td = document.querySelector("#no6");
+            td.innerHTML = parseInt(Math.random() * 45) + 1; // 1 ~ 45(포함)
+        }
+        // 2. 이벤트 처리기를 객체에 등록
+        var button = document.querySelector("#button1")
+        button.addEventListener("click", selectWinningNumbers);
+
+    </script>
+   
+</body>
+</html>
