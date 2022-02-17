@@ -40,7 +40,18 @@
         for (var i = 0; i < tds.length; i++) {
             // console.log : 브라우저의 개발자 도구에 출력 내용 표시
             console.log(tds[i].style.backgroundColor);
-            tds[i].addEventListener('click', function(event) { changeColor(event.target.style.backgroundColor); });
+            // tds[i].addEventListener('click', 
+            //                         function(event) { 
+            //                             changeColor(event.target.style.backgroundColor); 
+            //                         });
+            tds[i].addEventListener('mouseover', // == mouseenter
+                                    function(event) { 
+                                        changeColor(event.target.style.backgroundColor); 
+                                    });
+            tds[i].addEventListener('mouseout', // == mouseleave
+                                    function(event) { 
+                                        changeColor(""); 
+                                    });                                    
         }
 
     </script>

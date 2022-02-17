@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <h2>Document 객체와 이벤트 처리 실습</h2>
+    <hr>
+    <button id="button1">번호 생성기</button>
+    <hr>
+    <div id="result"></div>
+    
+    <script type="text/javascript">
+        // button1을 클릭하면 1 ~ 45 사이의 난수 만들기 result에 표시
+        // 찾기 : document.querySelector
+        // 이벤트 연결 : addEventListener
+        // div에 값 표시 : innerHTML (innerText)
+        // 난수 발생 : Math.random()
+
+        function makeNumber(event) { // event : 현재 발생한 이벤트와 관련된 정보
+            var result = document.querySelector("#result");
+            result.innerHTML = parseInt( Math.random() * 45 ) + 1;
+        }
+        var button1 = document.querySelector("#button1");
+        button1.addEventListener("click", makeNumber);
+    </script>
+   
+</body>
+</html>
