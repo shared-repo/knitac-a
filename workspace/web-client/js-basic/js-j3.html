@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        tr#images img {
+            width: 60px;
+            height: 60px;
+        }
+        tr#selected-image img {
+            width: 100%;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Document 객체와 이벤트 처리 실습</h2>
+    <hr>
+    <table border="1" align="center">        
+        <tr id="selected-image">
+            <td colspan="10">
+                <img src="image/no_image.jpg">
+            </td>
+        </tr>
+        <tr id="images">
+            <td><img src="image/1.jpg"></td>
+            <td><img src="image/2.jpg"></td>
+            <td><img src="image/3.jpg"></td>
+            <td><img src="image/4.jpg"></td>
+            <td><img src="image/5.jpg"></td>
+            <td><img src="image/6.jpg"></td>
+            <td><img src="image/7.jpg"></td>
+            <td><img src="image/8.jpg"></td>
+            <td><img src="image/9.jpg"></td>
+            <td><img src="image/10.jpg"></td>
+        </tr>
+    </table>
+        
+    <script type="text/javascript">
+        // id="images" tr 하위의 td안에 이미지 표시 태그 추가
+        // id="images" tr 하위의 td안에 이미지 표시 태그의 width, height를 css를 사용해서 60px로 설정
+        // id='selected-image' tr 하위의 td안에 이미지 표시 태그 추가 
+        // width, height 600px으로 설정
+
+        // id="images" tr 하위의 이미지 표시 태그 위에 마우스가 올라가면 
+        // 해당 이미지 표시 태그의 이미지를 
+        // id="selected-image" 하위의 이미지 표시 태그에 적용
+
+        function showSelectedImage(event) {
+            var img = document.querySelector('#selected-image img');
+            var currentEventImg = event.target;
+            img.src = currentEventImg.src;
+        }
+        var imgs = document.querySelectorAll('#images img');
+        for (var i = 0; i < imgs.length; i++) {
+            imgs[i].addEventListener('mouseover', showSelectedImage);
+            imgs[i].addEventListener('mouseout', 
+                                     function(event) {
+                                        var img = document.querySelector('#selected-image img');
+                                        img.src = 'image/no_image.jpg'
+                                     });
+        }
+    </script>
+   
+</body>
+</html>
