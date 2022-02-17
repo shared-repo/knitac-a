@@ -29,24 +29,38 @@
     </table>
     
     <script type="text/javascript">
-        //red-1. 이벤트 처리 함수 만들기
-        function changeColor1() {
+        function changeColor(color) {
             var canvas = document.querySelector("#canvas");
-            // alert(canvas.style.height); // style="height:100px" 값 읽기
-            canvas.style.backgroundColor = 'red'; // style='background-color:red'로 설정
+            canvas.style.backgroundColor = color;
+        }
+        //red-1. 이벤트 처리 함수 만들기        
+        function tdClickHandler1() {
+            changeColor('red');
         }
         //red-2. 이벤트에 이벤트 처리기 연결
         var td1 = document.querySelector("#td1");
-        td1.addEventListener('click', changeColor1);
+        // td1.addEventListener('click', tdClickHandler1);
+        td1.addEventListener('click', function() { changeColor('red'); });
 
-        //orange-1. 이벤트 처리 함수 만들기
-        function changeColor2() {
-            var canvas = document.querySelector("#canvas");
-            canvas.style.backgroundColor = 'orange';
-        }
+        //orange-1. 이벤트 처리 함수 만들기        
         //orange-2. 이벤트에 이벤트 처리기 연결
         var td2 = document.querySelector("#td2");
-        td2.addEventListener('click', changeColor2);        
+        td2.addEventListener('click', function() { changeColor('orange'); });
+
+        var td3 = document.querySelector("#td3");
+        td3.addEventListener('click', function() { changeColor('yellow'); });
+
+        var td4 = document.querySelector("#td4");
+        td4.addEventListener('click', function() { changeColor('green'); });
+
+        var td5 = document.querySelector("#td5");
+        td5.addEventListener('click', function() { changeColor('blue'); });
+
+        var td6 = document.querySelector("#td6");
+        td6.addEventListener('click', function() { changeColor('navy'); });
+
+        var td7 = document.querySelector("#td7");
+        td7.addEventListener('click', function() { changeColor('purple'); });
        
     </script>
    

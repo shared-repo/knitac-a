@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title></title> 
+    <style type="text/css">
+        #rainbow td {
+            width: 70px;
+            height: 70px
+        }
+    </style>
+</head>
+<body>
+    <h2>Document 객체와 이벤트 처리 연습</h2>
+    <hr>
+    <table border="1" align="center">
+        <tr id="rainbow">
+            <td id="td1" style="background-color:red">&nbsp;</td>
+            <td id="td2" style="background-color:orange">&nbsp;</td>
+            <td id="td3" style="background-color:yellow">&nbsp;</td>
+            <td id="td4" style="background-color:green">&nbsp;</td>
+            <td id="td5" style="background-color:blue">&nbsp;</td>
+            <td id="td6" style="background-color:navy">&nbsp;</td>
+            <td id="td7" style="background-color:purple">&nbsp;</td>
+        </tr>
+        <tr>
+            <td id="canvas" colspan="7" style="height:250px"></td>
+        </tr>
+    </table>
+    
+    <script type="text/javascript">
+        function changeColor(color) {
+            var canvas = document.querySelector("#canvas");
+            canvas.style.backgroundColor = color;
+        }
+
+        var td1 = document.querySelector("#td1");
+        // td1.addEventListener('click', function() { changeColor('red'); });
+        // td1.addEventListener('click', function() { changeColor(td1.style.backgroundColor); });        
+        td1.addEventListener('click', function(event) { changeColor(event.target.style.backgroundColor); });
+        // event 객체는 현재 발생한 이벤트 관련 정보를 저장
+        // event.target 속성은 현재 이벤트를 발생시킨 객체
+
+        var td2 = document.querySelector("#td2");
+        td2.addEventListener('click', function(event) { changeColor(event.target.style.backgroundColor); });
+
+        var td3 = document.querySelector("#td3");
+        td3.addEventListener('click', function(event) { changeColor(event.target.style.backgroundColor); });
+
+        var td4 = document.querySelector("#td4");
+        td4.addEventListener('click', function(event) { changeColor(event.target.style.backgroundColor); });
+
+        var td5 = document.querySelector("#td5");
+        td5.addEventListener('click', function(event) { changeColor(event.target.style.backgroundColor); });
+
+        var td6 = document.querySelector("#td6");
+        td6.addEventListener('click', function(event) { changeColor(event.target.style.backgroundColor); });
+
+        var td7 = document.querySelector("#td7");
+        td7.addEventListener('click', function(event) { changeColor(event.target.style.backgroundColor); });
+       
+    </script>
+   
+</body>
+</html>
