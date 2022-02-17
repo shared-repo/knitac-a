@@ -17,6 +17,22 @@
         }
         document.write("<hr>");
 
+        ar.push('orange'); // 배열의 끝에 요소 추가 python : ar.append('orange')
+        for (var i = 0; i < ar.length; i++) { // ar.length -> 파이썬은 len(ar)
+            document.write("<h3>" + ar[i] + "</h3>"); // ar[0], ar[1], ar[2]
+        }
+        document.write("<hr>");
+
+        var c = ar.pop(); // 배열의 끝에서 요소 꺼내기 python : ar.pop()
+        for (var i = 0; i < ar.length; i++) { // ar.length -> 파이썬은 len(ar)
+            document.write("<h3>" + ar[i] + "</h3>"); // ar[0], ar[1], ar[2]
+        }
+        document.write("<hr>");
+
+        var c = ar.shift(); // 배열의 처음에서 요소 꺼내기 python : ar.pop(0)
+        for (var i = 0; i < ar.length; i++) { // ar.length -> 파이썬은 len(ar)
+            document.write("<h3>" + ar[i] + "</h3>"); // ar[0], ar[1], ar[2]
+        }
     </script>
    
 </body>
