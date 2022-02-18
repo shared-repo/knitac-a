@@ -38,11 +38,11 @@
                                     function(event) { 
                                         var picture = document.querySelector('#picture');
                                         if (currentIdx < images.length - 1) { //배열.length - 1 : 배열의 마지막 요소의 위치 번호
-                                            currentIdx++; // currentIdx += 1
-                                            picture.src = "image/" + images[currentIdx];
+                                            currentIdx++; // currentIdx += 1                                            
                                         } else {
-                                            alert("마지막 이미지입니다.");
+                                            currentIdx = 0; // 처음으로 돌아가기
                                         }
+                                        picture.src = "image/" + images[currentIdx];
                                     });
 
         // 4. prev-button click 이벤트 처리기 등록
@@ -51,11 +51,11 @@
                                     function(event) { 
                                         var picture = document.querySelector('#picture');
                                         if (currentIdx > 0) { 
-                                            currentIdx--; // currentIdx -= 1
-                                            picture.src = "image/" + images[currentIdx];
+                                            currentIdx--; // currentIdx -= 1                                            
                                         } else {
-                                            alert("첫 번째 이미지입니다.");
+                                            currentIdx = images.length - 1; // 마지막으로 이동
                                         }
+                                        picture.src = "image/" + images[currentIdx];
                                     });
     </script>
    

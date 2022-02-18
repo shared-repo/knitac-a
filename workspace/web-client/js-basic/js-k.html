@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    
+</head>
+<body>
+    <h2>Window 객체의 타이머 도구 연습</h2>
+    <hr>
+    <button id="start-button">시작</button>
+    <button id="stop-button">중지</button>
+    <hr>
+    <div id="message"></div>
+        
+    <script type="text/javascript">
+        // 타이머 : 일정한 시간 간격마다 (3초에 한 번씩 등) 특정한 동작을 수행하는 도구
+        // javascript에서 타이머 구현을 위해 setTimeout, setInterval 함수 사용
+
+        var timer = null; // null은 파이썬의 None
+        function showTime() {
+            var message = document.querySelector("#message");
+            message.innerHTML = new Date();
+            
+            // setTimeout(함수, 시간); 시간 후에 실행할 함수 등록하고 실행 예약 번호 반환
+            timer = setTimeout(showTime, 1000); // 타이머의 핵심 
+        }
+        var startBtn = document.querySelector("#start-button");
+        startBtn.addEventListener("click",
+                                  function(event) {
+                                    if (timer == null) { // 기존에 동작하는 타이머가 없을 때
+                                        showTime();
+                                        changeButtonState(true);
+                                    }
+                                  });
+        var stopBtn = document.querySelector("#stop-button");
+        stopBtn.addEventListener("click",
+                                 function(event) {
+                                    if (timer != null) { // 기존에 동작하는 타이머가 있을 때
+                                        // clearTimeout : setTimeout으로 예약된 작업을 취소
+                                        clearTimeout(timer);
+                                        timer = null;
+                                        changeButtonState(false);
+                                    } 
+                                 });
+        function changeButtonState(isStarted) {
+            // if (isStarted) {
+            //     startBtn.disabled = true;
+            //     stopBtn.disabled = false;
+            // } else {
+            //     startBtn.disabled = false;
+            //     stopBtn.disabled = true;
+            // }
+            startBtn.disabled = isStarted;
+            stopBtn.disabled = !isStarted;    // !true -> false, !false -> true            
+        }
+        changeButtonState(false); // 처음 상태는 isStarted = false
+    </script>
+   
+</body>
+</html>
