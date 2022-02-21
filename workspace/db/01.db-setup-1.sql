@@ -1,3 +1,5 @@
+/* execute as root */
+
 DROP DATABASE IF EXISTS  madang;		/* 기존 데이터베이스가 있다면 제거 */
 DROP USER IF EXISTS  madang@localhost;	/* 기존 사용자가 있다면 제거 */
 DROP USER IF EXISTS  madang@"%";		/* 기존 사용자가 있다면 제거 */
