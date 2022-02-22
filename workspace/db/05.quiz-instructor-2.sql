@@ -104,8 +104,23 @@ WHERE b.bookid = o.bookid
       b.price - o.saleprice = ( SELECT MAX(b.price - o.saleprice)
 								FROM book b, orders o
 								WHERE b.bookid = o.bookid );
+                                
+-- 전체도서의 판매(orders)액 평균보다 자신의 구매액 평균이 더 높은 고객(customer)의 이름
+/* 1-1 전체 도서의 판매액 평균 조회 */
+SELECT AVG(saleprice) 평균판매액 -- 결과 : 11800
+FROM orders;
+/* 1-2 고객별 구매액 평균 */
+SELECT custid, AVG(saleprice) 평균구매액
+FROM orders
+GROUP BY custid;
 
-
+/* 2 */
+SELECT c.custid, c.name, AVG(o.saleprice) 평균구매액
+FROM orders o, customer c
+WHERE o.custid = c.custid
+GROUP BY c.custid
+HAVING AVG(o.saleprice) > ( SELECT AVG(saleprice)
+						    FROM orders );
 
 
 
