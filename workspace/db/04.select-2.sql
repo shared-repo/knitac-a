@@ -113,6 +113,22 @@ ON c.custid = o.custid
 GROUP BY c.custid
 ORDER BY SUM(o.saleprice) DESC;
 
+-- 가장 비싼 도서의 이름을 보이시오.
+SELECT *
+FROM book;
+
+SELECT MAX(price) 최고가
+FROM book;
+
+SELECT *
+FROM book
+WHERE price = 35000;
+
+SELECT *
+FROM book
+WHERE price = (	SELECT MAX(price)
+				FROM book );
+
 
 
 
