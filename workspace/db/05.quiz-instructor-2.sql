@@ -68,6 +68,42 @@ FROM orders o, customer c
 WHERE o.custid = c.custid
 GROUP BY c.custid;
 
+SELECT c.name 고객이름, SUM(saleprice) 구매액
+FROM orders o
+INNER JOIN customer c
+ON o.custid = c.custid
+GROUP BY c.custid;
+
+-- 고객(customer)의 이름과 고객이 구매(orders)한 도서(book) 목록
+SELECT c.name, b.*
+FROM customer c, orders o, book b
+WHERE c.custid = o.custid AND o.bookid = b.bookid;
+
+SELECT c.name, b.*
+FROM customer c
+INNER JOIN orders o
+ON c.custid = o.custid
+INNER JOIN book b
+ON o.bookid = b.bookid;
+
+-- 도서의 가격(Book 테이블)과 판매가격(Orders 테이블)의 차이가 가장 많은 주문
+/* 1-1 도서별로 (도서의 가격 - 판매 가격) 조회 */
+SELECT b.bookid, b.bookname, b.price - o.saleprice 할인액
+FROM book b, orders o
+WHERE b.bookid = o.bookid;
+/* 1-2 (도서의 가격 - 판매 가격)이 가장 큰 값 조회 */
+SELECT MAX(b.price - o.saleprice) 최대할인액 -- 결과 : 6000
+FROM book b, orders o
+WHERE b.bookid = o.bookid;
+
+/* 2 */
+SELECT b.bookid, b.bookname, b.price - o.saleprice 할인액
+FROM book b, orders o
+WHERE b.bookid = o.bookid 
+	  AND
+      b.price - o.saleprice = ( SELECT MAX(b.price - o.saleprice)
+								FROM book b, orders o
+								WHERE b.bookid = o.bookid );
 
 
 
