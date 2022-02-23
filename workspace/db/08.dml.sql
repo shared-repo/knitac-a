@@ -52,6 +52,32 @@ WHERE custid = 5;
 
 SELECT * FROM customer; -- 변경 데이터 확인
 
+/* Book 테이블에서 14번 ‘스포츠 의학’의 출판사를 
+   imported_book 테이블의 21번 책의 출판사와 동일하게 변경하시오. */
+SELECT * FROM imported_book WHERE bookid = 21; -- 데이터 확인
+SELECT * FROM book WHERE bookid = 14; -- 데이터 확인
+
+-- 1-1. imported_book 테이블의 21번 도서의 출판사 조회
+SELECT publisher -- 조회 결과 : Pearson
+FROM imported_book 
+WHERE bookid = 21;
+
+-- 1-2. book 테이블의 14번 도서의 출판사를 1-1의 조회 결과(Pearson)로 변경
+UPDATE book
+SET publisher = 'Pearson'
+WHERE bookid = 14;
+
+SELECT * FROM book WHERE bookid = 14; -- 데이터 확인
+
+-- 2
+UPDATE book
+SET publisher = ( SELECT publisher
+				  FROM imported_book 
+				  WHERE bookid = 21 )
+WHERE bookid = 13; -- 테스트를 위해 13번을 수정
+
+SELECT * FROM book WHERE bookid = 13; -- 데이터 확인
+
 
 
 
