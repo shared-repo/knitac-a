@@ -74,6 +74,121 @@ CREATE TABLE newbook
 DESC newbook;
 DROP TABLE IF EXISTS newbook;
 
+-- -----------------------------------------------------
+
+USE madang; -- 작업 데이터베스를 madang으로 변경
+
+/* 다음과 같은 속성을 가진 NewCustomer 테이블을 생성하시오.
+   • custid(고객번호) - INTEGER, 기본키
+   • name(이름) – VARCHAR(40)
+   • address(주소) – VARCHAR(40)
+   • phone(전화번호) – VARCHAR(30) */
+   
+CREATE TABLE NewCustomer
+(
+	custid INTEGER PRIMARY KEY,
+    name VARCHAR(40),
+    address VARCHAR(40),
+    phone VARCHAR(30)
+);
+
+DESC NewCustomer;
+DROP TABLE IF EXISTS NewCustomer;
+
+/* 다음과 같은 속성을 가진 NewOrders 테이블을 생성하시오.
+   • orderid(주문번호) - INTEGER, 기본키
+   • custid(고객번호) - INTEGER, NOT NULL 제약조건, 외래키(NewCustomer.custid, 연쇄삭제)
+   • bookid(도서번호) - INTEGER, NOT NULL 제약조건, 외래키(NewBook.bookid, 연쇄삭제)
+   • saleprice(판매가격) - INTEGER 
+   • orderdate(판매일자) – DATE */
+   
+-- 이 실습을 하려면 위의 NewCustomer 테이블 생성 구문과 NewBook 테이블 생성 구문을 실행해서 
+-- 미리 테이블을 만들어 두어야합니다. ( 외래키를 지정하기 위해 )
+
+DROP TABLE IF EXISTS NewCustomer;
+CREATE TABLE NewCustomer
+(
+	custid INTEGER PRIMARY KEY,
+    name VARCHAR(40),
+    address VARCHAR(40),
+    phone VARCHAR(30)
+);
+DROP TABLE IF EXISTS NewBook;
+CREATE TABLE NewBook
+(
+	bookid	INTEGER PRIMARY KEY,
+    bookname VARCHAR(40),
+    publisher VARCHAR(40),
+    price INTEGER
+);
+
+CREATE TABLE NewOrders
+(
+	orderid INTEGER PRIMARY KEY,
+    custid INTEGER NOT NULL,
+    bookid INTEGER NOT NULL,
+    saleprice INTEGER,
+    orderdate DATE, -- DATE : 날짜 자료형
+    -- FOREIGN KEY (custid) REFERENCES NewCustomer(custid) ON DELETE CASCADE,
+    -- FOREIGN KEY (bookid) REFERENCES NewBook(bookid) ON DELETE CASCADE
+    CONSTRAINT fk_newcustomer_neworders FOREIGN KEY (custid) REFERENCES NewCustomer(custid) ON DELETE CASCADE,
+    CONSTRAINT fk_newbook_neworders FOREIGN KEY (bookid) REFERENCES NewBook(bookid) ON DELETE CASCADE
+);
+DESC NewOrders;
+DROP TABLE IF EXISTS NewOrders;
+-- 아래 DROP 구문은 NewOrder를 먼저 Drop 처리한 후에 실행해야 합니다.
+DROP TABLE IF EXISTS NewCustomer;
+DROP TABLE IF EXISTS NewBook;
+
+/* 다음 요구사항에 따라 SQL문을 작성하고 실행하세요 
+   실행을 위해 먼저 NewBook 테이블을 만들어야 합니다 */
+   
+DROP TABLE IF EXISTS NewBook;
+CREATE TABLE NewBook
+(
+	bookid	INTEGER,
+    bookname VARCHAR(40),
+    publisher VARCHAR(40),
+    price INTEGER
+);
+
+-- NewBook 테이블에 VARCHAR(13)의 자료형을 가진 isbn 속성을 추가하시오.
+ALTER TABLE NewBook
+ADD isbn VARCHAR(13);
+DESC NewBook;
+
+-- NewBook 테이블의 isbn 속성의 데이터 타입을 INTEGER형으로 변경하시오.
+ALTER TABLE NewBook
+MODIFY isbn INTEGER;
+DESC NewBook;
+
+-- NewBook 테이블의 isbn 속성을 삭제하시오
+ALTER TABLE NewBook
+DROP COLUMN isbn;
+DESC NewBook;
+
+-- NewBook 테이블의 bookname 속성에 NOT NULL 제약조건을 적용하시오
+ALTER TABLE NewBook
+MODIFY bookname varchar(40) NOT NULL;
+DESC NewBook;
+
+-- NewBook 테이블의 bookid 속성을 기본키로 변경하시오
+ALTER TABLE NewBook
+-- ADD PRIMARY KEY (bookid) -- 아래 구문으로 대체 가능
+ADD CONSTRAINT pk_book_bookid PRIMARY KEY (bookid);
+DESC NewBook;
+
+-- 테스트 정리
+DROP TABLE IF EXISTS NewBook;
+
+
+
+
+
+
+
+
+
 
 
 
