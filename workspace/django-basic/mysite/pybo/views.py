@@ -27,7 +27,7 @@ def index(request):
                   context) # pybo/question_list.html 을 사용해서 응답 html을 반환하는 명령
 
 def detail(request, question_id):
-    # question = Question.objects.get(id=question_id)
+    # question = Question.objects.get(id=question_id) # 데이터가 없으면 오류 발생 및 500 응답 처리
     question = get_object_or_404(Question, pk=question_id) # 데이터가 없으면 404 응답 처리
     context = { "question": question }
     return render(request, 
