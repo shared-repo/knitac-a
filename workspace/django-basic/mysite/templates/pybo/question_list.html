@@ -5,6 +5,15 @@
     <title>Question List</title>
 </head>
 <body>
-    <h2>Question List</h2>    
+    <h2>Question List</h2>
+    {% if questions %} {# questions : view에서 전달한 데이터 #}
+
+    {% for question in questions %}
+    <h3>
+        {{ question.id }}. <a href="/pybo/{{ question.id }}">{{ question.subject }}</a>
+    </h3>
+    {% endfor %}
+    
+    {% endif %}
 </body>
 </html>

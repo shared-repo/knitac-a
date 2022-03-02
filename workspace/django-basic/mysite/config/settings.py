@@ -57,7 +57,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [BASE_DIR / 'templates'], # .../mysite/templates 폴더를 의미
-        'APP_DIRS': True,
+        'APP_DIRS': True, # app 하위 경로에 templates 폴더를 사용할 수 있도록 설정
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
