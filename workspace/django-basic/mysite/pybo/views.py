@@ -57,4 +57,4 @@ def answer_create(request, question_id):
     return redirect('pybo:detail', question_id=question_id)
 
 def question_create(request):
-    pass
+    return render(request, 'pybo/question_form.html')
