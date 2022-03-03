@@ -30,7 +30,7 @@
     </div>
     {% endfor %}
     
-    <!-- <form action="/pybo/answer/create/" method="post" class="my-3"> -->
+    <!-- <form action="/pybo/answer/create/{{ question.id }}" method="post" class="my-3"> -->
     <form action="{% url 'pybo:answer_create' question.id %}" method="post" class="my-3">
         {% csrf_token %}
         <div class="form-group">

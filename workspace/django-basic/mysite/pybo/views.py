@@ -50,4 +50,11 @@ def answer_create(request, question_id):
     answer.create_date = timezone.now()
     answer.save() # 데이터베이스에 데이터 저장
     
+    # context = { "question": question }
+    # return render(request, 
+    #               "pybo/question_detail.html",
+    #               context)
     return redirect('pybo:detail', question_id=question_id)
+
+def question_create(request):
+    pass
