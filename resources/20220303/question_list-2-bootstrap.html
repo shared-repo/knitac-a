@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <!-- pybo CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <title>파이보</title>
+</head>
+<body>
+<div class="container my-3">
+    
+    <table class="table">
+        <thead>
+        <tr class="text-center thead-dark">
+            <th>번호</th>
+            <th>추천</th>
+            <th style="width:50%">제목</th>
+            <th>글쓴이</th>
+            <th>작성일시</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+        
+        <tr class="text-center">
+            <td>
+                <!-- 번호 = 전체건수 - 시작인덱스 - 현재인덱스 + 1 -->
+                
+            </td>
+            <td>
+                
+                <span class="badge badge-warning px-2 py-1"></span>
+               
+            </td>
+            <td class="text-left">
+                <a href="#"></a>
+                
+                <span class="text-danger small ml-2"></span>
+                
+            </td>
+            <td></td>  <!-- 글쓴이 추가 -->
+            <td></td>
+        </tr>
+
+
+        <tr>
+            <td colspan="5">질문이 없습니다.</td>
+        </tr>
+
+        </tbody>
+    </table>
+
+    <a href="#" class="btn btn-primary">질문 등록하기</a>
+</div>
+<form id="searchForm" method="get" action="">
+    <input type="hidden" id="kw" name="kw" value="">
+    <input type="hidden" id="page" name="page" value="">
+    <input type="hidden" id="so" name="so" value="">
+</form>
+<!-- jQuery JS -->
+<script src="{% static 'jquery-3.4.1.min.js' %}"></script>
+<!-- Bootstrap JS -->
+<script src="{% static 'bootstrap.min.js' %}"></script>
+<script type='text/javascript'>
+
+</script>
+
+</body>
+</html>

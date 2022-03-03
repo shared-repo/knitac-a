@@ -123,6 +123,9 @@ STATIC_URL = 'static/'                      # 웹경로 지정 : http://127.0.0.
 STATICFILES_DIRS = [BASE_DIR / 'static']    # 컴퓨터 경로 지정 : ...\mysite\static
 # STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
+
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
