@@ -11,7 +11,7 @@
         {% for bookmark in bookmarks %}
         <h3>
             {{ bookmark.id }}. {{ bookmark.title }} 
-            [<a href="/bookmark/{{bookmark.id}}">북마크 내용 보기</a>]
+            [<a href="{% url 'bookmark:detail' bookmark.id %}">북마크 내용 보기</a>]
         </h3>
         {% endfor %}
 

@@ -11,6 +11,8 @@
     {% for question in questions %}
     <h3>
         {{ question.id }}. <a href="/pybo/{{ question.id }}">{{ question.subject }}</a>
+        <br>
+        {{ question.id }}. <a href="{% url 'pybo:detail' question.id %}">{{ question.subject }}</a>
     </h3>
     {% endfor %}
     
