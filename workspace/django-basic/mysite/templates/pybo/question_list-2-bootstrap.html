@@ -1,6 +1,17 @@
-{% extends 'base.html' %}
-
-{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+    <!-- pybo CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <title>파이보</title>
+</head>
+<body>
 <div class="container my-3">
     
     <table class="table">
@@ -17,7 +28,7 @@
         {% if questions %}
         {% for question in questions %}
         <tr class="text-center">
-            <td>{{ question. }}</td>
+            <td>{{ question.id}}</td>
             <td>
                 <span class="badge badge-warning px-2 py-1">0</span>
             </td>
@@ -40,9 +51,14 @@
 
     <a href="#" class="btn btn-primary">질문 등록하기</a>
 </div>
-{% endblock %}
 
-{% block script %}
-<script type="text/javascript">    
+<!-- jQuery JS -->
+<script src="{% static 'js/jquery-3.6.0.js' %}"></script>
+<!-- Bootstrap JS -->
+<script src="{% static 'js/bootstrap.js' %}"></script>
+<script type='text/javascript'>
+
 </script>
-{% endblock %}
+
+</body>
+</html>

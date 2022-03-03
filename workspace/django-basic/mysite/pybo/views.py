@@ -1,8 +1,8 @@
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 
 # from pybo.models import Question
-from .models import Question
+from .models import Answer, Question
 
 # Create your views here.
 
@@ -33,3 +33,21 @@ def detail(request, question_id):
     return render(request, 
                   "pybo/question_detail.html",
                   context)
+
+
+def answer_create(request, question_id):
+    # 브라우저에서 전송한 데이터 읽기
+    # request : 요청 정보를 담고 있는 객체
+    # request.POST : post 방식으로 전송된 데이터 담고 있는 dict 객체
+    content = request.POST.get('content')
+
+    # 읽은 데이터 사용 (db에 데이터 저장)
+    from django.utils import timezone
+    question = get_object_or_404(Question, pk=question_id)
+    answer = Answer()
+    answer.question = question
+    answer.content = content 
+    answer.create_date = timezone.now()
+    answer.save() # 데이터베이스에 데이터 저장
+    
+    return redirect('pybo:detail', question_id=question_id)
