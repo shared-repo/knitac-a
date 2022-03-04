@@ -6,7 +6,7 @@
     <table class="table">
         <thead>
         <tr class="text-center thead-dark">
-            <th>번호</th>
+            <th>번호 (ID)</th>
             <th>추천</th>
             <th style="width:50%">제목</th>
             <th>글쓴이</th>
@@ -17,7 +17,7 @@
         {% if questions %}
         {% for question in questions %}
         <tr class="text-center">
-            <td>{{ question. }}</td>
+            <td>{{ forloop.counter }} ({{ question.id }})</td> {# forloop 변수 : 반복문의 반복 정보 제공하는 객체 #}
             <td>
                 <span class="badge badge-warning px-2 py-1">0</span>
             </td>

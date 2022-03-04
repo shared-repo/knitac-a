@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Question
+from .models import Answer, Question
 
 class QuestionForm(forms.ModelForm):
     class Meta: # 정보를 제공하는 (설정하는) 클래스
@@ -9,4 +9,12 @@ class QuestionForm(forms.ModelForm):
         labels = {
             'subject': "제목", # subject field는 제목으로 표시하는 설정
             'content': "내용"  # content field는 내용으로 표시하는 설정
+        }
+
+class AnswerForm(forms.ModelForm):
+    class Meta:
+        model = Answer
+        fields = [ 'content' ]
+        labels = {
+            'content': '답변내용'
         }

@@ -31,13 +31,24 @@
     {% endfor %}
     
     <!-- <form action="/pybo/answer/create/{{ question.id }}" method="post" class="my-3"> -->
-    <form action="{% url 'pybo:answer_create' question.id %}" method="post" class="my-3">
+    <form id="answer-form" action="{% url 'pybo:answer_create' question.id %}" method="post" class="my-3">
         {% csrf_token %}
+        {% if form.errors %} {# 유효성 검사에 실패한 경우 #}
+        <div class="alert alert-danger" role="alert">
+            {% for field in form %} {# 각 필드를 순회하면서 #}
+                {% if field.errors %} {# 현재 필드에 유효성 오류가 있다면 #}
+                [ {{ field.label }} ]<strong>{{ field.errors }}</strong>
+                {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
         <div class="form-group">
             <textarea name="content" id="content" class="form-control" rows="10"></textarea>
         </div>
         <br>
-        <input type="submit" value="답변등록" class="btn btn-primary">
+        <input type="submit" value="답변등록 (서버유효성검사)" class="btn btn-primary">
+        &nbsp;
+        <input type="button" id="save-button" value="답변등록 (브라우저유효성검사)" class="btn btn-primary">
     </form>
 
 </div>
@@ -45,5 +56,14 @@
 
 {% block script %}
 <script type='text/javascript'>
+    var save_button = document.querySelector('#save-button');
+    save_button.addEventListener('click', function(event) {
+        content = document.querySelector("#content").value;
+        if (content.length == 0) {
+            alert('답변내용을 입력하세요');
+        } else {
+            document.querySelector("#answer-form").submit();
+        }
+    });
 </script>
 {% endblock %}
