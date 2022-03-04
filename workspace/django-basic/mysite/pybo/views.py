@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 
 # from pybo.models import Question
 from .models import Answer, Question
+from .forms import QuestionForm
 
 # Create your views here.
 
@@ -56,14 +57,33 @@ def answer_create(request, question_id):
     #               context)
     return redirect('pybo:detail', question_id=question_id)
 
-def question_create(request):
-    
-    print( request.method )
+# def question_create(request):
+#     if request.method == 'GET':
+#         # 1. 화면을 보여주거나 ( GET 요청 )
+#         return render(request, 'pybo/question_form.html')
+#     else:
+#         # 2. 데이터를 처리하거나 ( POST 요청 )
+#         from django.utils import timezone        
+#         subject = request.POST.get('subject') # <input ... name='subject' 에 입력된 데이터 읽기
+#         content = request.POST.get('content') # <input ... name='content' 에 입력된 데이터 읽기
+#         question = Question(subject=subject, content=content, create_date=timezone.now())        
+#         question.save()
+#         return redirect('pybo:index')
 
+def question_create(request):
     if request.method == 'GET':
         # 1. 화면을 보여주거나 ( GET 요청 )
         return render(request, 'pybo/question_form.html')
     else:
         # 2. 데이터를 처리하거나 ( POST 요청 )
-        pass
+        from django.utils import timezone        
+        form = QuestionForm(request.POST)
+        if form.is_valid(): # Model 정의에 따라 수행한 데이터의 유효성 검사 결과 반환
+            question = form.save(commit=False) # request.POST의 데이터를 Question 모델 객체에 저장
+            question.create_date = timezone.now()
+            question.save()
+            return redirect('pybo:index')
+        else:
+            context = { "form": form } # 유효성 검사 실패 정보가 포함된 form을 template에 전달
+            return render(request, 'pybo/question_form.html', context)
 
