@@ -16,11 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
-from pybo import views
+from . import views
+from pybo import views as pybo_views
 
 urlpatterns = [
+    path('', views.index),
+
     path('admin/', admin.site.urls),
 
-    # path('pybo/', views.index), # http://.../pybo 요청이 오면 views.index 호출
+    # path('pybo/', pybo_views.index), # http://.../pybo 요청이 오면 views.index 호출
     path('pybo/', include('pybo.urls')), # http://.../pybo 관련 요청이 오면 pybo.urls.py의 설정 내용 사용
 ]
