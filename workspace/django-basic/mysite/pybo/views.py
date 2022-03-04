@@ -57,4 +57,13 @@ def answer_create(request, question_id):
     return redirect('pybo:detail', question_id=question_id)
 
 def question_create(request):
-    return render(request, 'pybo/question_form.html')
+    
+    print( request.method )
+
+    if request.method == 'GET':
+        # 1. 화면을 보여주거나 ( GET 요청 )
+        return render(request, 'pybo/question_form.html')
+    else:
+        # 2. 데이터를 처리하거나 ( POST 요청 )
+        pass
+

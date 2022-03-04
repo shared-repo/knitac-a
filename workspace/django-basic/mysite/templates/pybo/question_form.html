@@ -3,8 +3,11 @@
 {% block content %}
 <div class="container">
     <h5 class="my-3 border-bottom pb-2">질문등록</h5>
-    <form method="post" class="post-form my-3">
-        
+    <!-- <form action="/pybo/question/create" method="post" class="post-form my-3"> -->
+    <form action="{% url 'pybo:question_create' %}" 
+          method="post" 
+          class="post-form my-3">
+        {% csrf_token %}
         <div class="form-group">
             <label for="subject">제목</label>
             <input type="text" class="form-control" name="subject" id="subject" value="">

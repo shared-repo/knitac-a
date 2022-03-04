@@ -19,6 +19,8 @@ urlpatterns = [
          name="answer_create"),
     path("question/create/", 
          views.question_create, 
-         name='question_create')
+         name='question_create'),
+
+     
 
 ]
