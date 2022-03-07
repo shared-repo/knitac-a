@@ -15,7 +15,9 @@ def index(request):
     paginator = Paginator(questions, 10) # 페이징 관리자 만들기
     page_object = paginator.get_page(page) # 현재 페이지 요청
     
-    context = { "questions": page_object }
+    page_list = list(range(max(page_object.number - 5, 1), page_object.number + 5))
+
+    context = { "questions": page_object, "page_list": page_list }
     return render(request, 
                   "pybo/question_list.html", 
                   context) # pybo/question_list.html 을 사용해서 응답 html을 반환하는 명령
