@@ -1,0 +1,31 @@
+1. 데이터베이스 만들기 ( mysql-workbench, root 계정으로 실행 )
+
+CREATE DATABASE pybo;
+
+GRANT ALL PRIVILEGES ON pybo.* TO knitac@localhost; -- 권한부여
+GRANT ALL PRIVILEGES ON pybo.* TO knitac@"%"; -- 권한부여
+
+FLUSH PRIVILEGES; -- 수정된 권한 설정을 적용
+
+2. 데이터베이스 연결 수정 ( config/settings.py )
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql', # 데이터베이스종류
+        'NAME': 'pybo',         # 데이터베이스이름
+        'USER': 'knitac',       # 아이디
+        'PASSWORD': 'knitac',   # 패스워드
+        'HOST': 'localhost',    # 서버 컴퓨터 IP
+        'PORT': '3306'          # 서버 컴퓨터 포트
+    }
+}
+
+3. mysqlclient 모듈 설치 ( 서버 중지 후 visual studio code 터미널에서 실행 )
+
+pip install mysqlclient
+
+4. 데이터베이스 이전 ( 서버 중지 후 visual studio code 터미널에서 실행 )
+
+python manage.py migrate
+
+5. 서버 실행해서 확인
