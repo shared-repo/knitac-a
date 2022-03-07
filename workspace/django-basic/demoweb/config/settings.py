@@ -77,12 +77,24 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql', # 데이터베이스종류
+        'NAME': 'demoweb',         # 데이터베이스이름
+        'USER': 'knitac',       # 아이디
+        'PASSWORD': 'knitac',   # 패스워드
+        'HOST': 'localhost',    # 서버 컴퓨터 IP
+        'PORT': '3306'          # 서버 컴퓨터 포트
     }
 }
+
 
 
 # Password validation

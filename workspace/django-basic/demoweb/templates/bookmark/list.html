@@ -16,5 +16,25 @@
         {% endfor %}
 
     {% endif %}
+
+    {% if bookmarks.has_previous %}
+    [<a href="?page={{ bookmarks.previous_page_number }}">이전</a>]&nbsp;
+    {% else %}
+    [<a href="javascript:">이전</a>]&nbsp;
+    {% endif %}
+
+    {% for number in page_list %}
+    {% if number == bookmarks.number %}
+    [<a href="javascript:">{{ number }}</a>]&nbsp;
+    {% else %}
+    [<a href="?page={{ number }}">{{ number }}</a>]&nbsp;
+    {% endif %}
+    {% endfor %}
+
+    {% if bookmarks.has_next %}
+    [<a href="?page={{ bookmarks.next_page_number }}">다음</a>]&nbsp;
+    {% else %}
+    [<a href="javascript:">다음</a>]&nbsp;
+    {% endif %}
 </body>
 </html>

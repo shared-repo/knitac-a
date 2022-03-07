@@ -53,6 +53,23 @@
         <!-- 이전페이지 -->
 
         <!-- 페이지리스트 -->
+        {# 주석 #}
+        {% comment %} 
+        {% for number in questions.paginator.page_range %}
+        {% if number >= questions.number|add:-5 and number < questions.number|add:5 %}
+            {% if number == questions.number %}
+            <li class="page-item active" aria-current="page">
+                <a class="page-link" href="javascript:">{{ number }}</a>
+            </li>
+            {% else %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ number }}">{{ number }}</a>
+            </li>
+            {% endif %}
+        {% endif %}
+        {% endfor %}
+        {% endcomment %}
+
         {% for number in page_list %}
             {% if number == questions.number %}
             <li class="page-item active" aria-current="page">
