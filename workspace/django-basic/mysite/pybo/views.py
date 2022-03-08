@@ -14,8 +14,8 @@ def index(request):
     page = request.GET.get('page', '1') # ?page=x에서 x의 값 읽기. 없으면 1반환
     paginator = Paginator(questions, 10) # 페이징 관리자 만들기
     page_object = paginator.get_page(page) # 현재 페이지 요청
-    
-    page_list = list(range(max(page_object.number - 5, 1), page_object.number + 5))
+    page_list = list(range(max(page_object.number - 5, 1), 
+                           min(page_object.number + 5, paginator.page_range.stop)))
 
     context = { "questions": page_object, "page_list": page_list }
     return render(request, 

@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load pybo_filters %}
 
 {% block content %}
 <div class="container my-3">
@@ -17,13 +18,19 @@
         {% if questions %}
         {% for question in questions %}
         <tr class="text-center">
-            <td>{{ forloop.counter }} ({{ question.id }})</td> {# forloop 변수 : 반복문의 반복 정보 제공하는 객체 #}
+            <td>
+                {# ({{ questions.start_index|add:forloop.counter0 }}) #} {# forloop 변수 : 반복문의 반복 정보 제공하는 객체 #}
+                {{ questions.paginator.count|sub:questions.start_index|sub:forloop.counter0|add:1 }}
+                ({{ question.id }})
+            </td> 
             <td>
                 <span class="badge badge-warning px-2 py-1">0</span>
             </td>
             <td class="text-left">
-                <a href="{% url 'pybo:detail' question.id %}">{{ question.subject }}</a>                
-                <span class="text-danger small ml-2"></span>                
+                <a href="{% url 'pybo:detail' question.id %}">{{ question.subject }}</a>
+                {% if question.answer_set.count > 0 %}                
+                <span class="text-danger small ml-2">(&nbsp;{{ question.answer_set.count }}&nbsp;)</span>
+                {% endif %}                
             </td>
             <td>테스터</td>  <!-- 글쓴이 추가 -->
             <td>{{ question.create_date }}</td>
