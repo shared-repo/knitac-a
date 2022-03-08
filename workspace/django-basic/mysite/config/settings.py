@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'pybo.apps.PyboConfig',
+    'common.apps.CommonConfig',
 ]
 
 MIDDLEWARE = [
@@ -140,3 +141,6 @@ STATICFILES_DIRS = [BASE_DIR / 'static']    # 컴퓨터 경로 지정 : ...\mysi
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = '/' # 로그인이 성공하면 이동할 경로 지정
+LOGOUT_REDIRECT_URL = '/' # 로그아웃하면 이동할 경로 지정
