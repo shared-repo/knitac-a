@@ -10,10 +10,21 @@
                 {{ question.content }}
             </div>
             <div class="d-flex justify-content-end">
-                <div class="badge badge-light p-2">
-                    {{ question.create_date }}
+                <div class="badge badge-light p-2 text-left">
+                    <div>{{ question.author.username }}</div>
+                    <div>{{ question.create_date }}</div>
                 </div>
             </div>
+            {% if question.author == user %} {# 로그인한 사용자와 작성자가 같다면 #}
+            <div>
+                <a href="{% url 'pybo:question_delete' question.id %}" 
+                   class="btn btn-sm btn-outline-secondary">즉시삭제</a>
+                <a id="question-delete-link"
+                   href="#"
+                   data-uri="{% url 'pybo:question_delete' question.id %}" 
+                   class="btn btn-sm btn-outline-secondary">확인후삭제</a>
+            </div>
+            {% endif %}
         </div>
     </div>
     <h5 class="border-bottom my-3 py-2">{{ question.answer_set.count }}개의 답변이 있습니다.</h5>
@@ -22,10 +33,16 @@
         <div class="card-body">
             <div class="card-text" style="white-space: pre-line;">{{ answer.content }}</div>
             <div class="d-flex justify-content-end">
-                <div class="badge badge-light p-2">
-                    {{ answer.create_date }}
+                <div class="badge badge-light p-2 text-left">
+                    <div>{{ answer.author.username }}</div>
+                    <div>{{ answer.create_date }}</div>
                 </div>
             </div>
+            {% if answer.author == user %} {# 로그인한 사용자와 작성자가 같다면 #}
+            <div>
+                <a href="#" class="delete btn btn-sm btn-outline-secondary">삭제</a>
+            </div>
+            {% endif %}
         </div>
     </div>
     {% endfor %}
@@ -43,12 +60,18 @@
         </div>
         {% endif %}
         <div class="form-group">
-            <textarea name="content" id="content" class="form-control" rows="10"></textarea>
+            <textarea name="content" id="content" 
+                      {% if not user.is_authenticated %}
+                      disabled
+                      {% endif %}
+                      class="form-control" rows="10"></textarea>
         </div>
         <br>
+        {% if user.is_authenticated %} {# 로그인하지 않으면 가리기 #}
         <input type="submit" value="답변등록 (서버유효성검사)" class="btn btn-primary">
         &nbsp;
         <input type="button" id="save-button" value="답변등록 (브라우저유효성검사)" class="btn btn-primary">
+        {% endif %}
     </form>
 
 </div>
@@ -63,6 +86,14 @@
             alert('답변내용을 입력하세요');
         } else {
             document.querySelector("#answer-form").submit();
+        }
+    });
+
+    var question_delete_link = document.querySelector("#question-delete-link");
+    question_delete_link.addEventListener('click', function(event) {
+        yn = confirm('질문을 삭제할까요?')
+        if (yn) {
+            // 삭제 처리
         }
     });
 </script>

@@ -32,7 +32,7 @@
                 <span class="text-danger small ml-2">(&nbsp;{{ question.answer_set.count }}&nbsp;)</span>
                 {% endif %}                
             </td>
-            <td>테스터</td>  <!-- 글쓴이 추가 -->
+            <td>{{ question.author.username }}</td>  <!-- 글쓴이 추가 -->
             <td>{{ question.create_date }}</td>
         </tr>
         {% endfor %}

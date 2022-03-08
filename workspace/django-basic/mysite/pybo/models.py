@@ -1,5 +1,7 @@
 from django.db import models
 
+from django.contrib.auth.models import User
+
 # Create your models here.
 
 # 모델 클래스 만들기 --> 테이블 만들기
@@ -9,6 +11,9 @@ class Question (models.Model):
     content = models.TextField()
     create_date = models.DateTimeField()
 
+    # 작성자 필드 추가 ( User 모델 객체 참조 )
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+
     def __str__(self): # __str__ : 객체(인스턴스의) 정보를 간단한 문자열로 반환하는 약속된 함수
         return self.subject
 
@@ -16,6 +21,9 @@ class Answer (models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     content = models.TextField()
     create_date = models.DateTimeField()
+
+    # 작성자 필드 추가 ( User 모델 객체 참조 )
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         if len(self.content) < 15:

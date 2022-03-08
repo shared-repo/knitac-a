@@ -2,6 +2,8 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.core.paginator import Paginator
 
+from django.contrib.auth.decorators import login_required
+
 # from pybo.models import Question
 from .models import Answer, Question
 from .forms import AnswerForm, QuestionForm
@@ -57,6 +59,7 @@ def answer_create(request, question_id):
         answer = form.save(commit=False) # 객체 조작 후 데이터베이스에 적용 작업 보류
         answer.create_date = timezone.now()        
         answer.question = question
+        answer.author = request.user # request.user : 로그인한 사용자 정보 (User 객체)
         answer.save() # 데이터베이스에 데이터 저장
         return redirect('pybo:detail', question_id=question_id)
     else:
@@ -75,7 +78,7 @@ def answer_create(request, question_id):
 #         question = Question(subject=subject, content=content, create_date=timezone.now())        
 #         question.save()
 #         return redirect('pybo:index')
-
+@login_required(login_url='common:login') # 로그인하지 않은 상태로 호출되면 로그인으로 자동 이동 처리 설정
 def question_create(request):
     if request.method == 'GET':
         # 1. 화면을 보여주거나 ( GET 요청 )
@@ -87,9 +90,25 @@ def question_create(request):
         if form.is_valid(): # Model 정의에 따라 수행한 데이터의 유효성 검사 결과 반환
             question = form.save(commit=False) # request.POST의 데이터를 Question 모델 객체에 저장
             question.create_date = timezone.now()
+            question.author = request.user # request.user : 로그인한 사용자 정보 (User 객체)
             question.save()
             return redirect('pybo:index')
         else:
             context = { "form": form } # 유효성 검사 실패 정보가 포함된 form을 template에 전달
             return render(request, 'pybo/question_form.html', context)
+
+
+def question_delete(request, question_id):
+    # questions = Question.objects.filter(id=question_id)
+    # if len(questions) == 0:
+    #     # 404 반환
+    #     pass
+    # else:
+    #     question = questions[0]
+    #     question.delete()
+    question = get_object_or_404(Question, pk=question_id)
+    question.delete()
+
+    return redirect('pybo:index')
+
 
