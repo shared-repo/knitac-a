@@ -40,7 +40,12 @@
             </div>
             {% if answer.author == user %} {# 로그인한 사용자와 작성자가 같다면 #}
             <div>
-                <a href="#" class="delete btn btn-sm btn-outline-secondary">삭제</a>
+                <a href="{% url 'pybo:answer_delete' answer.id %}" 
+                   class="btn btn-sm btn-outline-secondary">즉시삭제</a>
+                <a href="#" 
+                   id="answer-delete-link"
+                   data-uri="{% url 'pybo:answer_delete' answer.id %}"
+                   class="answer-delete btn btn-sm btn-outline-secondary">확인후삭제</a>
             </div>
             {% endif %}
         </div>
@@ -93,8 +98,26 @@
     question_delete_link.addEventListener('click', function(event) {
         yn = confirm('질문을 삭제할까요?')
         if (yn) {
-            // 삭제 처리
+            var link = event.target; // event.target : 현재 이벤트가 발생한 객체
+            var uri = link.getAttribute('data-uri'); // <a ... data-uri="address"에서 data-uri의 값을 반환
+            // 삭제 처리 ( 삭제 URL로 이동 )
+            location.href = uri; // location : 브라우저의 주소 입력기
         }
     });
+
+    // 답변 삭제
+    // var answer_delete_link = document.querySelector("#answer-delete-link"); // id는 고유값이므로 첫 번째 요소만 찾습니다.
+    var answer_delete_links = document.querySelectorAll(".answer-delete"); // class='answer-delete'인 모든 요소 찾기
+    for (var i = 0; i < answer_delete_links.length; i++) {
+        answer_delete_links[i].addEventListener('click', function(event) {
+            yn = confirm('답변을 삭제할까요?')
+            if (yn) {
+                var link = event.target; // event.target : 현재 이벤트가 발생한 객체
+                var uri = link.getAttribute('data-uri'); // <a ... data-uri="address"에서 data-uri의 값을 반환
+                // 삭제 처리 ( 삭제 URL로 이동 )
+                location.href = uri; // location : 브라우저의 주소 입력기
+            }
+        });
+    }
 </script>
 {% endblock %}

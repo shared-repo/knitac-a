@@ -111,4 +111,11 @@ def question_delete(request, question_id):
 
     return redirect('pybo:index')
 
+def answer_delete(request, answer_id):
+    answer = get_object_or_404(Answer, pk=answer_id)
+    question_id = answer.question.id
+    answer.delete()
+
+    return redirect('pybo:detail', question_id)
+
 
