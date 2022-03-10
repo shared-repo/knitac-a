@@ -17,6 +17,8 @@
             </div>
             {% if question.author == user %} {# 로그인한 사용자와 작성자가 같다면 #}
             <div>
+                <a href="{% url 'pybo:question_modify' question.id %}"
+                   class="btn btn-sm btn-outline-secondary">수정</a>
                 <a href="{% url 'pybo:question_delete' question.id %}" 
                    class="btn btn-sm btn-outline-secondary">즉시삭제</a>
                 <a id="question-delete-link"
@@ -40,6 +42,7 @@
             </div>
             {% if answer.author == user %} {# 로그인한 사용자와 작성자가 같다면 #}
             <div>
+                
                 <a href="{% url 'pybo:answer_delete' answer.id %}" 
                    class="btn btn-sm btn-outline-secondary">즉시삭제</a>
                 <a href="#" 

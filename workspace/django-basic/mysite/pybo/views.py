@@ -4,6 +4,8 @@ from django.core.paginator import Paginator
 
 from django.contrib.auth.decorators import login_required
 
+from django.utils import timezone
+
 # from pybo.models import Question
 from .models import Answer, Question
 from .forms import AnswerForm, QuestionForm
@@ -40,7 +42,6 @@ def detail(request, question_id):
 #     content = request.POST.get('content')
 
 #     # 읽은 데이터 사용 (db에 데이터 저장)
-#     from django.utils import timezone
 #     question = get_object_or_404(Question, pk=question_id)
 #     answer = Answer(question=question, content=content, create_date=timezone.now())
 #     answer.save() # 데이터베이스에 데이터 저장
@@ -55,7 +56,6 @@ def answer_create(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     form = AnswerForm(request.POST)
     if form.is_valid():
-        from django.utils import timezone
         answer = form.save(commit=False) # 객체 조작 후 데이터베이스에 적용 작업 보류
         answer.create_date = timezone.now()        
         answer.question = question
@@ -71,8 +71,7 @@ def answer_create(request, question_id):
 #         # 1. 화면을 보여주거나 ( GET 요청 )
 #         return render(request, 'pybo/question_form.html')
 #     else:
-#         # 2. 데이터를 처리하거나 ( POST 요청 )
-#         from django.utils import timezone        
+#         # 2. 데이터를 처리하거나 ( POST 요청 )        
 #         subject = request.POST.get('subject') # <input ... name='subject' 에 입력된 데이터 읽기
 #         content = request.POST.get('content') # <input ... name='content' 에 입력된 데이터 읽기
 #         question = Question(subject=subject, content=content, create_date=timezone.now())        
@@ -84,8 +83,7 @@ def question_create(request):
         # 1. 화면을 보여주거나 ( GET 요청 )
         return render(request, 'pybo/question_form.html')
     else:
-        # 2. 데이터를 처리하거나 ( POST 요청 )
-        from django.utils import timezone        
+        # 2. 데이터를 처리하거나 ( POST 요청 )     
         form = QuestionForm(request.POST)
         if form.is_valid(): # Model 정의에 따라 수행한 데이터의 유효성 검사 결과 반환
             question = form.save(commit=False) # request.POST의 데이터를 Question 모델 객체에 저장
@@ -118,4 +116,21 @@ def answer_delete(request, answer_id):
 
     return redirect('pybo:detail', question_id)
 
+@login_required(login_url='common:login')
+def question_modify(request, question_id):
+    question = get_object_or_404(Question, pk=question_id) # 수정 대상 Question 조회
+
+    if request.method == 'GET': # 화면 표시 요청
+        question_form = QuestionForm(instance=question) # QuestionModel을 사용해서 QuestionForm을 만들기
+        return render(request, 'pybo/question_form.html', { "form":  question_form })
+    else: # 수정 요청 ( 데이터 처리 요청 )
+        form = QuestionForm(request.POST, instance=question)
+        if form.is_valid():
+            question2 = form.save(commit=False)
+            question2.modify_date = timezone.now()
+            question2.save()
+
+            return redirect('pybo:detail', question_id)
+        else:
+            return render(request, 'pybo/question_form.html', { "form":  QuestionForm(instance=question) })
 

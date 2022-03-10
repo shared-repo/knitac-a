@@ -14,6 +14,9 @@ class Question (models.Model):
     # 작성자 필드 추가 ( User 모델 객체 참조 )
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    # 수정일자 필드 추가
+    modify_date = models.DateTimeField(null=True, blank=True)
+
     def __str__(self): # __str__ : 객체(인스턴스의) 정보를 간단한 문자열로 반환하는 약속된 함수
         return self.subject
 
@@ -24,6 +27,9 @@ class Answer (models.Model):
 
     # 작성자 필드 추가 ( User 모델 객체 참조 )
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    # 수정일자 필드 추가
+    modify_date = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         if len(self.content) < 15:
