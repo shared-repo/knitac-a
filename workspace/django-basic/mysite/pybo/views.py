@@ -134,3 +134,20 @@ def question_modify(request, question_id):
         else:
             return render(request, 'pybo/question_form.html', { "form":  QuestionForm(instance=question) })
 
+@login_required(login_url='common:login')
+def answer_modify(request, answer_id):
+    answer = get_object_or_404(Answer, pk=answer_id) # 수정 대상 Answer 조회
+    if request.method == 'GET': # 화면 표시 요청
+        answer_form = AnswerForm(instance=answer) # AnswerModel을 사용해서 AnswerForm을 만들기
+        return render(request, 'pybo/answer_form.html', { "form":  answer_form })
+    else: # 수정 요청 ( 데이터 처리 요청 )
+        form = AnswerForm(request.POST, instance=answer)
+        if form.is_valid():
+            answer2 = form.save(commit=False)
+            answer2.modify_date = timezone.now()
+            answer2.save()
+
+            return redirect('pybo:detail', answer.question.id)
+        else:
+            return render(request, 'pybo/answer_form.html', { "form":  AnswerForm(instance=answer) })
+
