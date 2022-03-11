@@ -172,3 +172,27 @@ def comment_create_question(request, question_id):
             return redirect("pybo:detail", question_id)
         else:
             return render(request, 'pybo/comment_form.html', { "form": form })
+
+@login_required(login_url="common:login")
+def comment_delete_question(request, comment_id):
+    comment = get_object_or_404(Comment, pk=comment_id)
+    comment.delete() # ORM Model 객체의 delete는 데이터베이스 테이블의 행 삭제 수행
+    return redirect("pybo:detail", comment.question.id)
+
+@login_required(login_url="common:login")
+def comment_modify_question(request, comment_id):
+
+    comment = get_object_or_404(Comment, pk=comment_id)
+
+    if request.method == 'GET':
+        return render(request, 'pybo/comment_form.html', { "form": CommentForm(instance=comment) })
+    else:
+        form = CommentForm(request.POST, instance=comment)
+        if form.is_valid():
+            comment = form.save(commit=False) # 1. 요청데이터 -> Comment로 데이터 이동 + 2. Comment -> 데이터베이스 (여기서는 2번 X)
+            comment.modify_date = timezone.now()
+            comment.save()
+
+            return redirect("pybo:detail", comment.question.id)
+        else:
+            return render(request, 'pybo/comment_form.html', { "form": form })
