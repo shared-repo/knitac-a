@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% load pybo_filters %}
+
+{% block content %}
+<div class="container my-3">
+    
+    <table class="table">
+        <thead>
+        <tr class="text-center thead-dark">
+            <th>번호 (ID)</th>
+            <th>추천</th>
+            <th style="width:50%">제목</th>
+            <th>글쓴이</th>
+            <th>작성일시</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if questions %}
+        {% for question in questions %}
+        <tr class="text-center">
+            <td>
+                {# ({{ questions.start_index|add:forloop.counter0 }}) #} {# forloop 변수 : 반복문의 반복 정보 제공하는 객체 #}
+                {{ questions.paginator.count|sub:questions.start_index|sub:forloop.counter0|add:1 }}
+                ({{ question.id }})
+            </td> 
+            <td>
+                <span class="badge badge-warning px-2 py-1">0</span>
+            </td>
+            <td class="text-left">
+                <a href="{% url 'pybo:detail' question.id %}">{{ question.subject }}</a>
+                {% if question.answer_set.count > 0 %}                
+                <span class="text-danger small ml-2">(&nbsp;{{ question.answer_set.count }}&nbsp;)</span>
+                {% endif %}                
+            </td>
+            <td>{{ question.author.username }}</td>  <!-- 글쓴이 추가 -->
+            <td>{{ question.create_date }}</td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="5">질문이 없습니다.</td>
+        </tr>
+        {% endif %}
+
+        </tbody>
+    </table>
+
+    <!-- 페이징처리 시작 -->
+    <ul class="pagination justify-content-center">
+        <!-- 이전페이지 -->
+        {% if questions.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ questions.previous_page_number }}">이전</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="javascript:">이전</a>
+        </li>
+        {% endif %}
+        <!-- 이전페이지 -->
+
+        <!-- 페이지리스트 -->
+        {# 주석 #}
+        {% comment %} 
+        {% for number in questions.paginator.page_range %}
+        {% if number >= questions.number|add:-5 and number < questions.number|add:5 %}
+            {% if number == questions.number %}
+            <li class="page-item active" aria-current="page">
+                <a class="page-link" href="javascript:">{{ number }}</a>
+            </li>
+            {% else %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ number }}">{{ number }}</a>
+            </li>
+            {% endif %}
+        {% endif %}
+        {% endfor %}
+        {% endcomment %}
+
+        {% for number in page_list %}
+            {% if number == questions.number %}
+            <li class="page-item active" aria-current="page">
+                <a class="page-link" href="javascript:">{{ number }}</a>
+            </li>
+            {% else %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ number }}">{{ number }}</a>
+            </li>
+            {% endif %}
+        {% endfor %}
+        <!-- 페이지리스트 -->
+
+        <!-- 다음페이지 -->
+        {% if questions.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ questions.next_page_number }}">다음</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="javascript:">다음</a>
+        </li>
+        {% endif %}
+        <!-- 다음페이지 -->
+    </ul>
+    <!-- 페이징처리 끝 -->
+
+    <a href="{% url 'pybo:question_create' %}" class="btn btn-primary">질문 등록하기</a>
+</div>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">    
+</script>
+{% endblock %}

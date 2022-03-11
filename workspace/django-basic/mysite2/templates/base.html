@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+    <!-- pybo CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <title>파이보</title>
+</head>
+<body>
+
+{% include 'navbar.html' %} {# include : 다른 템플릿을 포함하는 명령 #}
+
+{% block content %}
+{% endblock %}
+
+<!-- jQuery JS -->
+<script src="{% static 'js/jquery-3.6.0.js' %}"></script>
+<!-- Bootstrap JS -->
+<script src="{% static 'js/bootstrap.js' %}"></script>
+
+{% block script %}
+{% endblock %}
+
+</body>
+</html>
