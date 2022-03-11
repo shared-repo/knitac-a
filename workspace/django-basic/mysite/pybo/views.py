@@ -162,7 +162,7 @@ def comment_create_question(request, question_id):
     else:
         form = CommentForm(request.POST)
         if form.is_valid():
-            comment = form.save(commit=False)
+            comment = form.save(commit=False) # 1. 요청데이터 -> Comment로 데이터 이동 + 2. Comment -> 데이터베이스 (여기서는 2번 X)
             comment.author = request.user
             comment.create_date = timezone.now()
             comment.question = question

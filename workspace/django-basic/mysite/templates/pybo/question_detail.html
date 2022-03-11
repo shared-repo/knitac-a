@@ -28,7 +28,7 @@
                 <a href="{% url 'pybo:question_delete' question.id %}" 
                    class="btn btn-sm btn-outline-secondary">즉시삭제</a>
                 <a id="question-delete-link"
-                   href="#"
+                   href="javascript:"
                    data-uri="{% url 'pybo:question_delete' question.id %}" 
                    class="btn btn-sm btn-outline-secondary">확인후삭제</a>
             </div>
@@ -44,7 +44,10 @@
                     </span>
                     {% if comment.author == request.user %}
                     <a href="" class="small">수정</a>,
-                    <a href="#" class="small" data-uri="">삭제</a>
+                    <a href="javascript:" 
+                       id="comment-delete-question-link" 
+                       class="small comment-delete-question" 
+                       data-uri="">삭제</a>
                     {% endif %}
                 </div>
                 {% endfor %}
@@ -153,6 +156,17 @@
                 var uri = link.getAttribute('data-uri'); // <a ... data-uri="address"에서 data-uri의 값을 반환
                 // 삭제 처리 ( 삭제 URL로 이동 )
                 location.href = uri; // location : 브라우저의 주소 입력기
+            }
+        });
+    }
+
+    // var comment_delete_link = document.querySelector("#comment-delete-question-link");
+    var comment_delete_links = document.querySelectorAll(".comment-delete-question");
+    for (var i = 0; i < comment_delete_links.length; i++) {
+        comment_delete_links[i].addEventListener('click', function(event) {
+            yn = confirm("댓글을 삭제할까요?");
+            if (yn) {
+
             }
         });
     }
