@@ -36,3 +36,20 @@ class Answer (models.Model):
             return self.content
         else:
             return self.content[:15] + "..."
+
+class Comment (models.Model):
+
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.TextField()
+    create_date = models.DateTimeField()
+    modify_date = models.DateTimeField(null=True, blank=True)
+    
+    # question과 answer에 대한 참조는 상호 배타적(question을 참조하면 answer를 참조할 수 없으며 역도 마찬가지)
+    question = models.ForeignKey(Question, null=True, blank=True, on_delete=models.CASCADE)
+    answer = models.ForeignKey(Answer, null=True, blank=True, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        if len(self.content) < 15:
+            return self.content
+        else:
+            return self.content[:15] + "..."

@@ -34,6 +34,10 @@ urlpatterns = [
     path("answer/delete/<int:answer_id>",
          views.answer_delete,
          name="answer_delete"),
+
+    path("comment/create/question/<int:question_id>",
+         views.comment_create_question,
+         name="comment_create_question"),
    
 
 ]

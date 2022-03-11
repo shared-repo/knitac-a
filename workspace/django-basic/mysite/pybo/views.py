@@ -1,3 +1,4 @@
+from time import time
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.core.paginator import Paginator
@@ -7,8 +8,8 @@ from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 
 # from pybo.models import Question
-from .models import Answer, Question
-from .forms import AnswerForm, QuestionForm
+from .models import Answer, Question, Comment
+from .forms import AnswerForm, QuestionForm, CommentForm
 
 # Create your views here.
 
@@ -151,3 +152,23 @@ def answer_modify(request, answer_id):
         else:
             return render(request, 'pybo/answer_form.html', { "form":  AnswerForm(instance=answer) })
 
+@login_required(login_url="common:login")
+def comment_create_question(request, question_id):
+
+    question = get_object_or_404(Question, pk=question_id)
+
+    if request.method == 'GET':
+        return render(request, 'pybo/comment_form.html')
+    else:
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.author = request.user
+            comment.create_date = timezone.now()
+            comment.question = question
+            # comment.answer = None # 필요 없음
+            comment.save()
+
+            return redirect("pybo:detail", question_id)
+        else:
+            return render(request, 'pybo/comment_form.html', { "form": form })

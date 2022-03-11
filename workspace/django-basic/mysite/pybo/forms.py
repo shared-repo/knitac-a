@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Answer, Question
+from .models import Answer, Question, Comment
 
 class QuestionForm(forms.ModelForm):
     class Meta: # 정보를 제공하는 (설정하는) 클래스
@@ -17,4 +17,12 @@ class AnswerForm(forms.ModelForm):
         fields = [ 'content' ]
         labels = {
             'content': '답변내용'
+        }
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = [ 'content' ]
+        labels = {
+            'content': '댓글내용'
         }
