@@ -12,10 +12,13 @@ class Question (models.Model):
     create_date = models.DateTimeField()
 
     # 작성자 필드 추가 ( User 모델 객체 참조 )
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, related_name="author_question", on_delete=models.CASCADE)
 
     # 수정일자 필드 추가
     modify_date = models.DateTimeField(null=True, blank=True)
+
+    # 추천인 필드 추가
+    voter = models.ManyToManyField(User, related_name="voter_question")
 
     def __str__(self): # __str__ : 객체(인스턴스의) 정보를 간단한 문자열로 반환하는 약속된 함수
         return self.subject
@@ -26,10 +29,13 @@ class Answer (models.Model):
     create_date = models.DateTimeField()
 
     # 작성자 필드 추가 ( User 모델 객체 참조 )
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, related_name="author_answer", on_delete=models.CASCADE)
 
     # 수정일자 필드 추가
     modify_date = models.DateTimeField(null=True, blank=True)
+
+    # 추천인 필드 추가
+    voter = models.ManyToManyField(User, related_name="voter_answer")
 
     def __str__(self):
         if len(self.content) < 15:
@@ -53,3 +59,6 @@ class Comment (models.Model):
             return self.content
         else:
             return self.content[:15] + "..."
+
+
+        

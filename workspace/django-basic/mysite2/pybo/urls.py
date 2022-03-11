@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import base_views, question_views, answer_views, comment_views
+from .views import base_views, question_views, answer_views, comment_views, vote_views
 
 app_name = "pybo" # 경로 이름에 대한 namespace : pybo:index, pybo:detail 사용하도록 설정
 
@@ -51,5 +51,12 @@ urlpatterns = [
     path("comment/delete/answer/<int:comment_id>",
          comment_views.comment_delete_answer,
          name="comment_delete_answer"), 
+
+    path("vote/question/<int:question_id>",
+         vote_views.vote_question,
+         name="vote_question"), 
+    path("vote/answer/<int:answer_id>",
+         vote_views.vote_answer,
+         name="vote_answer"), 
 
 ]
