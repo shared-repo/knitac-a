@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent # 여기서는 mysite 폴더
@@ -134,8 +135,11 @@ STATIC_URL = 'static/'                      # 웹경로 지정 : http://127.0.0.
 STATICFILES_DIRS = [BASE_DIR / 'static']    # 컴퓨터 경로 지정 : ...\mysite\static
 # STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
-
-
+# MEDIA_URL = 'media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = 'media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+print(MEDIA_ROOT)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

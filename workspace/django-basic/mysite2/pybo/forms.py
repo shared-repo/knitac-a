@@ -8,7 +8,7 @@ class QuestionForm(forms.ModelForm):
         fields = [ 'subject', 'content' ] # 자동 변환 대상 필드 (변수, 컬럼)
         labels = {
             'subject': "제목", # subject field는 제목으로 표시하는 설정
-            'content': "내용"  # content field는 내용으로 표시하는 설정
+            'content': "내용",  # content field는 내용으로 표시하는 설정            
         }
 
 class AnswerForm(forms.ModelForm):

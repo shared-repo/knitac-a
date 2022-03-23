@@ -20,6 +20,10 @@ class Question (models.Model):
     # 추천인 필드 추가
     voter = models.ManyToManyField(User, related_name="voter_question")
 
+    # 파일 관련 필드 추가
+    attachment = models.FileField(upload_to="question_attachments/") # 파일 자동 저장, 고유한 이름 생성
+    user_file_name = models.CharField(max_length=200) # 사용자가 입력한 파일 이름
+
     def __str__(self): # __str__ : 객체(인스턴스의) 정보를 간단한 문자열로 반환하는 약속된 함수
         return self.subject
 

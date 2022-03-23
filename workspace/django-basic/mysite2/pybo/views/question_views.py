@@ -1,3 +1,5 @@
+import os
+from django.http import FileResponse
 from django.shortcuts import get_object_or_404, redirect, render
 
 from django.contrib.auth.decorators import login_required
@@ -19,6 +21,13 @@ def question_create(request):
             question = form.save(commit=False) # request.POST의 데이터를 Question 모델 객체에 저장
             question.create_date = timezone.now()
             question.author = request.user # request.user : 로그인한 사용자 정보 (User 객체)
+            
+            attachment = request.FILES.get('attachment', None)
+            question.attachement = attachment
+            question.user_file_name = attachment.name # 사용자가 입력한 파일 이름
+            
+            print(type(attachment))
+
             question.save()
             return redirect('pybo:index')
         else:
@@ -48,3 +57,17 @@ def question_delete(request, question_id):
     question.delete()
 
     return redirect('pybo:index')
+
+def attachment_download_question(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    if question.attachment:
+        file_path = question.attachment
+        # FileResponse : 파일 다운로드 전용 응답 객체
+        response = FileResponse(open(os.path.join("media", file_path.name), 'rb'), 
+                                content_type='application/octet-stream') # 브라우저에게 컨텐츠의 종류를 안내 -> 여기서는 다운로드
+        response['Content-Disposition'] = f'attachment; filename={question.user_file_name}' # 다운로드 파일 이름 지정
+        # response['Content-Disposition'] = 'attachment; filename=' + question.user_file_name # 다운로드 파일 이름 지정
+
+        return response
+    else:
+        return redirect("pybo:detail", question.id)

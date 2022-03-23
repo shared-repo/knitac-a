@@ -15,6 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.conf.urls.static import static
+
+from config import settings
 
 from . import views
 from pybo import views as pybo_views
@@ -27,4 +30,4 @@ urlpatterns = [
     # path('pybo/', pybo_views.index), # http://.../pybo 요청이 오면 views.index 호출
     path('pybo/', include('pybo.urls')), # http://.../pybo 관련 요청이 오면 pybo.urls.py의 설정 내용 사용
     path('common/', include('common.urls')), # http://.../common 관련 요청이 오면 common.urls.py의 설정 내용 사용
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
