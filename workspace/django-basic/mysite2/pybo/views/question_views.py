@@ -23,10 +23,10 @@ def question_create(request):
             question.author = request.user # request.user : 로그인한 사용자 정보 (User 객체)
             
             attachment = request.FILES.get('attachment', None)
-            question.attachement = attachment
-            question.user_file_name = attachment.name # 사용자가 입력한 파일 이름
-            
-            print(type(attachment))
+            if (attachment is not None and len(attachment.name) > 0):            
+                question.attachement = attachment
+                question.user_file_name = attachment.name # 사용자가 입력한 파일 이름
+                print(type(attachment))
 
             question.save()
             return redirect('pybo:index')
