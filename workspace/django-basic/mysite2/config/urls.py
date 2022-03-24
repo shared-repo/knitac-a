@@ -30,4 +30,4 @@ urlpatterns = [
     # path('pybo/', pybo_views.index), # http://.../pybo 요청이 오면 views.index 호출
     path('pybo/', include('pybo.urls')), # http://.../pybo 관련 요청이 오면 pybo.urls.py의 설정 내용 사용
     path('common/', include('common.urls')), # http://.../common 관련 요청이 오면 common.urls.py의 설정 내용 사용
-]# + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # static으로 등록되는 경로 추가 ( 직접 접근 가능 경로 )

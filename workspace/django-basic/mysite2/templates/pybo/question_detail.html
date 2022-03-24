@@ -21,6 +21,9 @@
                         {{ question.user_file_name }} [<a href="{% url 'pybo:attachment_download_question' question.id %}" class="small">다운로드</a>]
                         {% endif %}
                     </div>
+                    <div>
+                        <img src="/media/{{ question.attachment }}" width="100" height="100">
+                    </div>
                     <div class="d-flex justify-content-end">
                         {% if question.modify_date %}
                         <div class="badge badge-light p-2 text-left mx-2">
