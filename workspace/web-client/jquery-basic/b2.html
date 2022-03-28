@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title></title> 
+    <style type="text/css">
+        #rainbow td {
+            width: 70px;
+            height: 70px
+        }
+    </style>
+</head>
+<body>
+    <h2>jQuery 이벤트 처리 연습</h2>
+    <hr>
+    <table border="1" align="center">
+        <tr id="rainbow">
+            <td id="td1" style="background-color:red">&nbsp;</td>
+            <td id="td2" style="background-color:orange">&nbsp;</td>
+            <td id="td3" style="background-color:yellow">&nbsp;</td>
+            <td id="td4" style="background-color:green">&nbsp;</td>
+            <td id="td5" style="background-color:blue">&nbsp;</td>
+            <td id="td6" style="background-color:navy">&nbsp;</td>
+            <td id="td7" style="background-color:purple">&nbsp;</td>
+        </tr>
+        <tr>
+            <td id="canvas" colspan="7" style="height:250px"></td>
+        </tr>
+    </table>
+    
+    <script src="/js/jquery-3.6.0.js"></script>
+    <script type="text/javascript">
+
+        $('#rainbow td').on('mouseover', function(event) {
+            color = $(this).css('background-color'); // $(this): 현재 이벤트가 발생한 객체 (event.target)
+            $('#canvas').css('background-color', color);
+        });
+        $('#rainbow td').on('mouseout', function(event) {
+            color = $(this).css('background-color'); // $(this): 현재 이벤트가 발생한 객체 (event.target)
+            $('#canvas').css('background-color', "");
+        });
+
+    </script>
+   
+</body>
+</html>

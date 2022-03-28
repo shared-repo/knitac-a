@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title></title> 
+    <style type="text/css">
+        #rainbow td {
+            width: 70px;
+            height: 70px
+        }
+    </style>
+</head>
+<body>
+    <h2>jQuery 이벤트 처리 연습</h2>
+    <hr>
+    <table border="1" align="center">
+        <tr id="rainbow">
+            <td id="td1" style="background-color:red">&nbsp;</td>
+            <td id="td2" style="background-color:orange">&nbsp;</td>
+            <td id="td3" style="background-color:yellow">&nbsp;</td>
+            <td id="td4" style="background-color:green">&nbsp;</td>
+            <td id="td5" style="background-color:blue">&nbsp;</td>
+            <td id="td6" style="background-color:navy">&nbsp;</td>
+            <td id="td7" style="background-color:purple">&nbsp;</td>
+        </tr>
+        <tr>
+            <td id="canvas" colspan="7" style="height:250px"></td>
+        </tr>
+    </table>
+    
+    <script type="text/javascript">
+
+        function changeColor(color) {
+            var canvas = document.querySelector("#canvas");
+            canvas.style.backgroundColor = color;
+        }
+
+        // document.querySelector("선택자") : "선택자"에 해당하는 첫 번째 객체 반환
+        var tds = document.querySelectorAll("#rainbow td") // "선택자"에 해당하는 모든 객체를 배열로 반환
+        for (var i = 0; i < tds.length; i++) {
+            // console.log : 브라우저의 개발자 도구에 출력 내용 표시
+            console.log(tds[i].style.backgroundColor);
+            // tds[i].addEventListener('click', 
+            //                         function(event) { 
+            //                             changeColor(event.target.style.backgroundColor); 
+            //                         });
+            tds[i].addEventListener('mouseover', // == mouseenter
+                                    function(event) { 
+                                        changeColor(event.target.style.backgroundColor); 
+                                    });
+            tds[i].addEventListener('mouseout', // == mouseleave
+                                    function(event) { 
+                                        changeColor(""); 
+                                    });                                    
+        }
+
+    </script>
+   
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery</title>
+</head>
+<body>
+    <button id="btn">눌러주세요</button>
+    <hr>
+    <div id="message"></div>
+
+    <!-- <script src="/js/jquery-3.6.0.js"></script> -->
+    <!-- <script src="/js/jquery-3.6.0.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        $(function() { // $ == jQuery, $(function() { ... }) : jQuery 실행 시작점
+            $('#btn').on('click', function(event) {
+                //$('#message').html(new Date());
+                var h2 = $('<h2>' + new Date() + '</h2>'); // $('html') : 새 html 요소 생성
+                $('#message').empty(); // empty : 모든 자식 요소 제거
+                $('#message').append(h2); // append : 새 자식 요소 추가
+            });
+        });
+    </script>
+</body>
+</html>
