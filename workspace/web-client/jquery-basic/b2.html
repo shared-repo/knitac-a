@@ -31,14 +31,29 @@
     <script src="/js/jquery-3.6.0.js"></script>
     <script type="text/javascript">
 
-        $('#rainbow td').on('mouseover', function(event) {
-            color = $(this).css('background-color'); // $(this): 현재 이벤트가 발생한 객체 (event.target)
-            $('#canvas').css('background-color', color);
+        $(function() {
+            //1. 
+            // $('#rainbow td').on('mouseover', function(event) {
+            //     var color = $(this).css('background-color'); // $(this): 현재 이벤트가 발생한 객체 (event.target)
+            //     $('#canvas').css('background-color', color);
+            // });
+            // $('#rainbow td').on('mouseout', function(event) {
+            //     $('#canvas').css('background-color', "");
+            // });
+
+            //2. 
+            $('#rainbow td').hover(
+                function() {
+                    var color = $(this).css('background-color'); // $(this): 현재 이벤트가 발생한 객체 (event.target)
+                    $('#canvas').css('background-color', color);
+                }, 
+                function() {
+                    $('#canvas').css('background-color', "");
+                }
+            )
         });
-        $('#rainbow td').on('mouseout', function(event) {
-            color = $(this).css('background-color'); // $(this): 현재 이벤트가 발생한 객체 (event.target)
-            $('#canvas').css('background-color', "");
-        });
+
+        
 
     </script>
    
