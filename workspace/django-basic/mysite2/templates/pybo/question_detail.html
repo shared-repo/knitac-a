@@ -173,17 +173,16 @@
 
 {% block script %}
 <script type='text/javascript'>
-    var save_button = document.querySelector('#save-button');
-    if (save_button) {
-        save_button.addEventListener('click', function(event) {
-            content = document.querySelector("#content").value;
+    $(function() {
+        $('#save-button').on('click', function() {
+            content = $("#content").val();
             if (content.length == 0) {
                 alert('답변내용을 입력하세요');
             } else {
-                document.querySelector("#answer-form").submit();
+                $("#answer-form").submit();
             }
         });
-    }
+    });
 
     function confirm_and_submit(event, message) {
         yn = confirm(message);
