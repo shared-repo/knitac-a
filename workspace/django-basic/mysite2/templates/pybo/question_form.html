@@ -26,7 +26,12 @@
                    value="{{ form.subject.value|default_if_none:'' }}">
         </div>
         <div class="form-group">
-            <label for="subject">첨부파일</label>
+            <label for="attachment">첨부파일</label>
+            <br>
+            <span>{{ form.attachment.value|default_if_none:'' }}</span>
+            &nbsp;
+            [<a href="#">삭제</a>]
+            <br>
             <input type="file" class="form-control" name="attachment">
         </div>
         <div class="form-group">

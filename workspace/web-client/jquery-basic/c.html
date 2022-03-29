@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery</title>
+</head>
+<body>
+    <button id="sync-btn">동기 방식 요청</button>
+    <button id="async-btn">비동기 방식 요청</button>
+    <hr>
+    <div id="message"></div>
+
+    <script src="/js/jquery-3.6.0.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            //Synchronous, All Refresh 요청
+            $('#sync-btn').on('click', function(event) {
+                location.href = 'data.txt';
+            });
+            $('#async-btn').on('click', function(event) {
+
+            });
+
+        });
+    </script>
+</body>
+</html>
