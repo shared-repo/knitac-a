@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 
 from django.contrib.auth.decorators import login_required
@@ -44,3 +45,20 @@ def answer_modify(request, answer_id):
             return redirect('pybo:detail', answer.question.id)
         else:
             return render(request, 'pybo/answer_form.html', { "form":  AnswerForm(instance=answer) })
+
+def ajax_answer_create(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    form = AnswerForm(request.POST)
+    if form.is_valid():
+        answer = form.save(commit=False) # 객체 조작 후 데이터베이스에 적용 작업 보류
+        answer.create_date = timezone.now()        
+        answer.question = question
+        answer.author = request.user # request.user : 로그인한 사용자 정보 (User 객체)
+        answer.save() # 데이터베이스에 데이터 저장
+        return HttpResponse("success")
+    else:
+        return HttpResponse("fail")
+
+def ajax_answer_list(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    return render(request, 'pybo/ajax_answer_list.html', { "question" : question })

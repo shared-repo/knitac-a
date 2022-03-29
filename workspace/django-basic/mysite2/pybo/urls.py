@@ -34,6 +34,12 @@ urlpatterns = [
     path("answer/delete/<int:answer_id>/",
          answer_views.answer_delete,
          name="answer_delete"),
+    path("answer/ajax_create/<int:question_id>/", 
+         answer_views.ajax_answer_create, 
+         name="ajax_answer_create"),  
+    path("answer/ajax/<int:question_id>/", 
+         answer_views.ajax_answer_list, 
+         name="ajax_answer_list"),  
 
     path("comment/create/question/<int:question_id>/",
          comment_views.comment_create_question,

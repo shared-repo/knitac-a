@@ -76,6 +76,7 @@
             </div>
         </div>
     </div>
+    <div id="answer_area">
     <h5 class="border-bottom my-3 py-2">{{ question.answer_set.count }}개의 답변이 있습니다.</h5>
     {% for answer in question.answer_set.all %}
     <div class="row my-3">
@@ -140,6 +141,7 @@
         </div>
     </div>
     {% endfor %}
+    </div>
     
     <!-- <form action="/pybo/answer/create/{{ question.id }}" method="post" class="my-3"> -->
     <form id="answer-form" action="{% url 'pybo:answer_create' question.id %}" method="post" class="my-3">
@@ -179,9 +181,38 @@
         $('#save-button').on('click', function() {
             content = $("#content").val();
             if (content.length == 0) {
-                alert('답변내용을 입력하세요');
+                alert('답변 내용을 입력하세요');
             } else {
                 $("#answer-form").submit();
+            }
+        });
+
+        $('#ajax-save-button').on('click', function() {
+            content = $("#content").val();
+            if (content.length == 0) {
+                alert('답변 내용을 입력하세요');
+            } else {
+                var form_data = $('#answer-form').serialize(); // <form> 내부의 데이터를 전송 형식으로 변환해서 반환
+                // alert(form_data);
+                $.ajax({
+                    "url": "{% url 'pybo:ajax_answer_create' question.id %}",
+                    "method": "post",
+                    "data": form_data,
+                    "success": function(data, status, xhr) {
+                        if (data == 'success') {
+                            $("#content").val("");
+                            // alert('답변 등록 성공');
+                            // load : ajax 방식으로 html을 받아서 지정된 요소에 표시
+                            $('#answer_area').load("{% url 'pybo:ajax_answer_list' question.id %}"); 
+
+                        } else {
+                            alert('답변 등록 실패 : 유효성 오류');
+                        }
+                    },
+                    "error": function(xhr, status, err) {
+                        alert('답변 등록 실패 : ' + err);
+                    }
+                });
             }
         });
     });
