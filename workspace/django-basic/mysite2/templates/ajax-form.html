@@ -12,16 +12,16 @@
     <hr>
     <div id="message"></div>
 
-    <script src="/js/jquery-3.6.0.js"></script>
+    <script src="/static/js/jquery-3.6.0.js"></script>
     <script type="text/javascript">
         $(function() {
             //Synchronous, All Refresh 요청
             $('#sync-btn').on('click', function(event) {
-                location.href = 'data.txt';
+                location.href = "{% url 'ajax_data' %}";
             });
             $('#async-btn').on('click', function(event) {
                 $.ajax({ // 비동기 요청을 수행하는 함수
-                    "url": "data.txt",
+                    "url": "{% url 'ajax_data' %}",
                     "method": "get",
                     "async": true,
                     "success": function(data, status, xhr) { // 비동기 요청에 대한 정상 응답이 온 경우 호출되는 함수
