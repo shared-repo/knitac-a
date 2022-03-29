@@ -215,6 +215,11 @@
                 });
             }
         });
+
+        // $(".answer-delete").on('click', function(event) { // 현재 문서에 포함된 class='answer-delete' 요소에 대해서 이벤트 연결
+        $("#answer_area").on('click', ".answer-delete", function(event) { // 현재 + 앞으로 문서에 포함될 class='answer-delete' 요소에 대해서 이벤트 연결
+            confirm_and_submit(event, '답변을 삭제할까요?');
+        });
     });
 
     function confirm_and_submit(event, message) {
@@ -230,13 +235,6 @@
     if (question_delete_link) {
         question_delete_link.addEventListener('click', function(event) {
             confirm_and_submit(event, "질문을 삭제할까요?");
-        });
-    }
-
-    var answer_delete_links = document.querySelectorAll(".answer-delete"); // class='answer-delete'인 모든 요소 찾기
-    for (var i = 0; i < answer_delete_links.length; i++) {
-        answer_delete_links[i].addEventListener('click', function(event) {
-            confirm_and_submit(event, "답변을 삭제할까요?");
         });
     }
 
