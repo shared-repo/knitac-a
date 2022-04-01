@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent # 여기서는 mysite 폴더
 SECRET_KEY = 'django-insecure-uhxj9^wg1#e)#*_&#z5$-_(z0ai523v!)6(l8n6vey3&2to@fv'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.150.135']
 
 
 # Application definition
