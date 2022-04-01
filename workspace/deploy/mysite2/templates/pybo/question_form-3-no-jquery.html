@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h5 class="my-3 border-bottom pb-2">질문등록</h5>
+    <form
+          method="post" 
+          enctype="multipart/form-data"
+          id="question-form"
+          class="post-form my-3">
+        {% csrf_token %}
+
+        {% if form.errors %} {# 유효성 검사에 실패한 경우 #}
+        <div class="alert alert-danger" role="alert">
+            {% for field in form %} {# 각 필드를 순회하면서 #}
+                {% if field.errors %} {# 현재 필드에 유효성 오류가 있다면 #}
+                [ {{ field.label }} ]<strong>{{ field.errors }}</strong>
+                {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="form-group">
+            <label for="subject">제목</label>
+            <input type="text" class="form-control" name="subject" id="subject" 
+                   value="{{ form.subject.value|default_if_none:'' }}">
+        </div>
+        <div class="form-group">
+            <label for="subject">첨부파일</label>
+            <input type="file" class="form-control" name="attachment">
+        </div>
+        <div class="form-group">
+            <label for="content">내용</label>
+            <textarea class="form-control" name="content" id="content" 
+                      rows="10">{{ form.content.value|default_if_none:'' }}</textarea>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">저장하기 (서버유효성검사)</button>
+        <button type="button" id="save-button" class="btn btn-primary">저장하기 (브라우저유효성검사)</button>
+    </form>
+</div>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+var save_button = document.querySelector("#save-button");   // 요소(객체) 찾기
+
+save_button.addEventListener("click", function(event) {     // 요소(객체)에 click 이벤트 연결하기
+    var subject = document.querySelector("#subject").value; // 요소(객체) 찾기 + value 속성으로 값 읽기    
+    var content = document.querySelector("#content").value; // 요소(객체) 찾기 + value 속성으로 값 읽기
+    var message = "";
+    if (subject.length == 0) {
+        message += "제목은 필수 입력 항목입니다."
+    }
+    if (content.length == 0) {
+        if (message.length > 0) {
+            message += "\n";
+        }
+        message += "내용은 필수 입력 항목입니다."
+    }
+
+    if (message.length > 0) {
+        alert(message);
+    } else {
+        var form = document.querySelector("#question-form"); // 요소(객체) 찾기
+        form.submit(); // 요소 객체의 함수 호출 --> 서버로 전송
+    }
+});
+</script>
+{% endblock %}
